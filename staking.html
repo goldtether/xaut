@@ -7,17 +7,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <style>
-        .staking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
-        .staking-grid .card { padding: 24px; }
-        .benefit-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px; }
-        .benefit-item .icon { color: #f9a825; font-size: 1.2rem; }
+        .staking-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        .staking-grid .card { padding: 28px 24px; }
+        .staking-grid .card h3 { color: #fff; font-size: 1.2rem; margin-bottom: 16px; }
+        .benefit-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        .benefit-item .icon { color: #f9a825; font-size: 1.2rem; margin-top: 2px; }
         .benefit-item h4 { color: #fff; font-size: 1rem; }
         .benefit-item p { color: #888; font-size: 0.85rem; }
-        .calc-result { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
-        .calc-result .box { background: rgba(255,255,255,0.02); padding: 12px; border-radius: 12px; text-align: center; }
+        .calc-input {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 12px 16px;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .calc-input:focus { outline: none; border-color: #f9a825; }
+        .calc-range {
+            width: 100%;
+            accent-color: #f9a825;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            height: 6px;
+        }
+        .calc-result {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .calc-result .box {
+            background: rgba(255,255,255,0.02);
+            padding: 14px 12px;
+            border-radius: 12px;
+            text-align: center;
+        }
         .calc-result .box .value { font-size: 1.2rem; font-weight: 700; color: #f9a825; }
         .calc-result .box .label { color: #888; font-size: 0.75rem; }
-        @media (max-width: 700px) { .staking-grid { grid-template-columns: 1fr; } }
+        .staking-cta {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(249,168,37,0.12);
+            border-radius: 24px;
+            padding: 40px 32px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) { .staking-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -25,6 +72,7 @@
 <div class="glow glow-1"></div>
 <div class="glow glow-2"></div>
 
+<!-- ===== HEADER ===== -->
 <header>
     <div class="container header-inner">
         <a href="index.html" class="logo">
@@ -43,48 +91,91 @@
             <a href="team.html">Team</a>
             <a href="contact.html">Contact</a>
             <a href="gallery.html">Gallery</a>
-            <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
+            <button class="btn-connect" onclick="alert('🔗 Connect wallet — coming soon!')">Connect Wallet</button>
         </nav>
     </div>
 </header>
 
-<section style="padding: 120px 0 60px;">
+<!-- ===== HERO ===== -->
+<section style="padding: 120px 0 40px;">
     <div class="container">
         <h1 class="section-title"><span class="text-gold">Stake</span> XAUT</h1>
         <p class="section-subtitle">Earn rewards by staking your XAUT tokens</p>
     </div>
 </section>
 
+<!-- ===== STAKING ===== -->
 <section style="padding: 20px 0 60px;">
     <div class="container">
         <div class="staking-grid">
             <div class="card">
-                <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 16px;">Staking Benefits</h3>
+                <h3>Staking Benefits</h3>
                 <div class="benefit-item"><span class="icon">✦</span><div><h4>25% APY</h4><p>Earn competitive rewards on your staked XAUT</p></div></div>
                 <div class="benefit-item"><span class="icon">✦</span><div><h4>Flexible Staking</h4><p>Stake for any duration — no lock-up period</p></div></div>
                 <div class="benefit-item"><span class="icon">✦</span><div><h4>Compound Rewards</h4><p>Automatically compound your earnings</p></div></div>
                 <div class="benefit-item"><span class="icon">✦</span><div><h4>Ecosystem Rewards</h4><p>Additional rewards from ecosystem growth</p></div></div>
+                <div class="benefit-item"><span class="icon">✦</span><div><h4>No Slashing</h4><p>Your stake is safe — no penalty for early withdrawal</p></div></div>
+                <div class="benefit-item"><span class="icon">✦</span><div><h4>Instant Unstake</h4><p>Withdraw your tokens anytime without delay</p></div></div>
             </div>
             <div class="card">
-                <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 16px;">Staking Calculator</h3>
-                <div style="margin-bottom: 12px;">
+                <h3>Staking Calculator</h3>
+                <div style="margin-bottom: 14px;">
                     <label style="color: #888; font-size: 0.85rem; display: block; margin-bottom: 4px;">Amount (XAUT)</label>
-                    <input type="number" id="stakeAmount" value="1000" min="0" style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 12px 16px; border-radius: 12px; color: #fff; font-size: 1rem;" />
+                    <input type="number" id="stakeAmount" value="1000" min="0" class="calc-input" />
                 </div>
                 <div style="margin-bottom: 16px;">
                     <label style="color: #888; font-size: 0.85rem; display: block; margin-bottom: 4px;">Days Staked</label>
-                    <input type="range" id="stakeDays" min="1" max="365" value="30" style="width: 100%; accent-color: #f9a825;" />
-                    <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.75rem;"><span>1 day</span><span id="daysDisplay">30 days</span><span>365 days</span></div>
+                    <input type="range" id="stakeDays" min="1" max="365" value="30" class="calc-range" />
+                    <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.75rem; margin-top: 4px;">
+                        <span>1 day</span>
+                        <span id="daysDisplay">30 days</span>
+                        <span>365 days</span>
+                    </div>
                 </div>
                 <div class="calc-result">
                     <div class="box"><div class="value" id="stakeTotal">0</div><div class="label">Total After</div></div>
                     <div class="box"><div class="value" id="stakeRewards">0</div><div class="label">Rewards Earned</div></div>
                 </div>
-                <button class="btn-gold" style="width: 100%; margin-top: 12px;">Stake Now</button>
+                <button class="btn-gold" style="width: 100%; margin-top: 16px;">Stake Now</button>
             </div>
         </div>
     </div>
 </section>
+
+<!-- ===== CTA ===== -->
+<section style="padding: 20px 0 60px; border-top: 1px solid rgba(255,255,255,0.04);">
+    <div class="container">
+        <div class="staking-cta">
+            <h3 style="font-size: 1.8rem; font-weight: 800; color: #fff;">Ready to Start Staking?</h3>
+            <p style="color: #888; max-width: 500px; margin: 12px auto 0;">Connect your wallet and start earning rewards on your XAUT tokens today.</p>
+            <button class="btn-gold" style="display: inline-block; margin-top: 20px;" onclick="alert('🔗 Connect wallet to start staking!')">Connect Wallet</button>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTRACT ===== -->
+<div class="container contract-box">
+    <div class="label">Contract Address</div>
+    <code>54cupsRcuquPgWqJRuS95kVub44qyMh5ZxhxVTnoQuBM</code>
+    <div class="pool-link">
+        <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">🔗 View Pool on GeckoTerminal</a>
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container">
+        <div class="socials">
+            <a href="https://x.com/xautgold" target="_blank">🐦 Twitter</a>
+            <a href="#" target="_blank">💬 Telegram</a>
+            <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
+            <a href="#" target="_blank">📈 CoinGecko</a>
+            <a href="#" target="_blank">📝 Medium</a>
+            <a href="#" target="_blank">🔗 GitHub</a>
+        </div>
+        <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
+    </div>
+</footer>
 
 <script>
     const amountInput = document.getElementById('stakeAmount');
@@ -108,18 +199,6 @@
     daysInput.addEventListener('input', updateCalculator);
     updateCalculator();
 </script>
-
-<footer>
-    <div class="container">
-        <div class="socials">
-            <a href="https://x.com/xautgold" target="_blank">🐦 Twitter</a>
-            <a href="#" target="_blank">💬 Telegram</a>
-            <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
-            <a href="#" target="_blank">📈 CoinGecko</a>
-        </div>
-        <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
-    </div>
-</footer>
 
 </body>
 </html>
