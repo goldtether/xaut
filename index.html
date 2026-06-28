@@ -5,385 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>XAUT — Xtreme Gold on Solana</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        a { color: #f9a825; text-decoration: none; transition: 0.2s; }
-        a:hover { opacity: 0.8; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-        /* Glow */
-        .glow {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(150px);
-            opacity: 0.06;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .glow-1 { width: 600px; height: 600px; background: #f9a825; top: -200px; right: -100px; }
-        .glow-2 { width: 500px; height: 500px; background: #f9a825; bottom: -150px; left: -100px; }
-
-        /* Header */
-        header {
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            background: rgba(10,10,10,0.95);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 22px;
-            font-weight: 900;
-            color: #fff;
-        }
-        .logo img { height: 40px; width: auto; border-radius: 50%; }
-        .logo span { color: #f9a825; }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            flex-wrap: wrap;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        .nav-links a { color: #a0a0a0; }
-        .nav-links a:hover { color: #f9a825; }
-        .nav-links .active { color: #f9a825; font-weight: 600; }
-        .btn-connect {
-            background: transparent;
-            border: 1px solid #f9a825;
-            color: #f9a825 !important;
-            padding: 8px 24px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-connect:hover { background: #f9a825; color: #0a0a0a !important; }
-
-        /* Hero */
-        .hero {
-            padding: 100px 0 80px;
-            text-align: center;
-            background: linear-gradient(180deg, #0a0a0a 0%, #141414 100%);
-            position: relative;
-            z-index: 1;
-        }
-        .hero-image {
-            width: 140px;
-            height: 140px;
-            margin-bottom: 32px;
-            border-radius: 50%;
-            box-shadow: 0 0 80px rgba(249,168,37,0.15);
-            border: 2px solid rgba(249,168,37,0.1);
-        }
-        .hero h1 {
-            font-size: clamp(3rem, 10vw, 5.5rem);
-            font-weight: 900;
-            line-height: 1.05;
-            letter-spacing: -2px;
-            margin-bottom: 16px;
-            color: #fff;
-        }
-        .hero h1 .highlight { 
-            background: linear-gradient(135deg, #f9a825, #e08e0b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            color: #888;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            font-weight: 300;
-        }
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 16px;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #f9a825, #e08e0b);
-            color: #0a0a0a !important;
-            font-weight: 700;
-            padding: 16px 48px;
-            border-radius: 60px;
-            font-size: 1.05rem;
-            display: inline-block;
-            transition: 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-primary:hover { transform: scale(1.02); box-shadow: 0 8px 40px rgba(249,168,37,0.3); opacity: 1; }
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.15);
-            color: #fff !important;
-            font-weight: 600;
-            padding: 16px 38px;
-            border-radius: 60px;
-            font-size: 1.05rem;
-            transition: 0.2s;
-            display: inline-block;
-        }
-        .btn-secondary:hover { border-color: #f9a825; background: rgba(249,168,37,0.05); }
-
-        /* Stats */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            padding: 40px 0 80px;
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        .stat-item {
-            text-align: center;
-            padding: 24px 20px;
-            border: 1px solid rgba(255,255,255,0.04);
-            border-radius: 16px;
-            background: rgba(255,255,255,0.02);
-        }
-        .stat-item .number {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #f9a825, #e08e0b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .stat-item .label {
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 4px;
-            font-weight: 400;
-        }
-
-        /* About */
-        .about { padding: 80px 0; border-top: 1px solid rgba(255,255,255,0.04); position: relative; z-index: 1; }
-        .about h2 {
-            text-align: center;
-            font-size: 2.4rem;
-            font-weight: 800;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-        .about .sub {
-            text-align: center;
-            color: #888;
-            max-width: 600px;
-            margin: 0 auto 50px;
-            font-weight: 300;
-        }
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
-        }
-        .about-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.04);
-            padding: 32px 24px 28px;
-            border-radius: 20px;
-            text-align: center;
-            transition: 0.3s;
-        }
-        .about-card:hover { border-color: #f9a825; transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-        .about-card .icon { font-size: 2.8rem; margin-bottom: 12px; }
-        .about-card h3 { font-size: 1.1rem; margin-bottom: 6px; color: #fff; font-weight: 600; }
-        .about-card p { font-size: 0.9rem; color: #888; font-weight: 300; }
-
-        /* Partners */
-        .partners {
-            padding: 60px 0;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-        .partners h2 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 36px;
-            color: #888;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .partners-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 50px;
-        }
-        .partner-item {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #666;
-            opacity: 0.6;
-            transition: 0.2s;
-            letter-spacing: 1px;
-        }
-        .partner-item:hover { opacity: 1; color: #f9a825; }
-        .partner-item .icon { font-size: 2.2rem; display: block; margin-bottom: 6px; }
-
-        /* Reserves */
-        .reserves { padding: 80px 0; border-top: 1px solid rgba(255,255,255,0.04); position: relative; z-index: 1; }
-        .reserves h2 {
-            text-align: center;
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: #fff;
-        }
-        .reserves .sub {
-            text-align: center;
-            color: #888;
-            max-width: 500px;
-            margin: 0 auto 50px;
-            font-weight: 300;
-        }
-        .reserves-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 24px;
-        }
-        .reserves-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.04);
-            padding: 28px 20px;
-            border-radius: 16px;
-            text-align: center;
-            transition: 0.3s;
-        }
-        .reserves-card:hover { border-color: #f9a825; }
-        .reserves-card .number { 
-            font-size: 1.8rem; 
-            font-weight: 800; 
-            background: linear-gradient(135deg, #f9a825, #e08e0b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .reserves-card .label { font-size: 0.85rem; color: #666; font-weight: 400; }
-
-        /* Contract Box */
-        .contract-box { text-align: center; padding: 20px 0 60px; position: relative; z-index: 1; }
-        .contract-box .label { color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
-        .contract-box code {
-            background: rgba(255,255,255,0.03);
-            padding: 12px 28px;
-            border-radius: 60px;
-            font-family: monospace;
-            font-size: 0.8rem;
-            color: #aaa;
-            border: 1px solid rgba(255,255,255,0.04);
-            display: inline-block;
-            word-break: break-all;
-            max-width: 100%;
-        }
-        .contract-box .pool-link {
-            margin-top: 16px;
-            font-size: 0.9rem;
-        }
-        .contract-box .pool-link a {
-            color: #f9a825;
-            font-weight: 500;
-        }
-        .contract-box .pool-link a:hover { text-decoration: underline; }
-
-        /* Footer */
-        footer {
-            padding: 40px 0;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            text-align: center;
-            color: #444;
-            font-size: 0.85rem;
-            position: relative;
-            z-index: 1;
-        }
-        footer .socials a {
-            color: #666;
-            margin: 0 16px;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-        footer .socials a:hover { color: #f9a825; }
-
-        @media (max-width: 700px) {
-            .header-inner { flex-direction: column; align-items: stretch; text-align: center; }
-            .nav-links { justify-content: center; gap: 16px; }
-            .hero h1 { font-size: 2.6rem; }
-            .hero { padding: 60px 0 40px; }
-            .about-grid { grid-template-columns: 1fr 1fr; }
-            .reserves-grid { grid-template-columns: 1fr 1fr; }
-            .partners-grid { gap: 24px; }
-        }
-        @media (max-width: 480px) { 
-            .about-grid { grid-template-columns: 1fr; } 
-            .reserves-grid { grid-template-columns: 1fr; }
-            .stats { grid-template-columns: 1fr 1fr; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <div class="glow glow-1"></div>
 <div class="glow glow-2"></div>
 
+<!-- ===== HEADER ===== -->
 <header>
     <div class="container header-inner">
-        <a href="#" class="logo">
+        <a href="index.html" class="logo">
             <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="XAUT">
             <span>XAUT</span>
         </a>
-        <div class="nav-links">
-            <a href="#" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#reserves">Tokenomics</a>
-            <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">Pool</a>
+        <nav class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="tokenomics.html">Tokenomics</a>
+            <a href="reserves.html">Reserves</a>
+            <a href="pool.html">Pool</a>
+            <a href="staking.html">Staking</a>
+            <a href="buy.html">Buy</a>
+            <a href="blog.html">Blog</a>
+            <a href="team.html">Team</a>
+            <a href="contact.html">Contact</a>
+            <a href="gallery.html">Gallery</a>
             <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
-        </div>
+        </nav>
     </div>
 </header>
 
+<!-- ===== HERO ===== -->
 <section class="hero">
     <div class="container">
         <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="XAUT" class="hero-image">
         <h1><span class="highlight">Xtreme Gold</span> on Solana</h1>
-        <p>XAUT is the gold standard of DeFi on Solana. Stake, borrow, and trade with the power of physical gold. 10B supply. Unlock the true value of gold with Solana speed and security.</p>
+        <p>XAUT is the gold standard of DeFi on Solana. Stake, borrow, and trade with the power of physical gold. 10B supply.</p>
         <div class="hero-buttons">
-            <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank" class="btn-primary">🚀 Buy XAUT</a>
-            <a href="#about" class="btn-secondary">Learn More</a>
+            <a href="buy.html" class="btn-gold">🚀 Buy XAUT</a>
+            <a href="about.html" class="btn-outline">Learn More</a>
         </div>
     </div>
 </section>
 
+<!-- ===== STATS ===== -->
 <div class="container stats">
+    <div class="stat-item">
+        <div class="number"><span id="clientCount">0</span></div>
+        <div class="label">Total Clients</div>
+    </div>
+    <div class="stat-item">
+        <div class="number"><span id="tradeCount">0</span></div>
+        <div class="label">Total Trades</div>
+    </div>
     <div class="stat-item">
         <div class="number">10B</div>
         <div class="label">Total Supply</div>
@@ -392,93 +67,69 @@
         <div class="number">$0.01</div>
         <div class="label">Price</div>
     </div>
-    <div class="stat-item">
-        <div class="number">$100M</div>
-        <div class="label">Market Cap</div>
+</div>
+
+<!-- ===== ABOUT PREVIEW ===== -->
+<section style="padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.04);">
+    <div class="container">
+        <h2 class="section-title">Why <span class="text-gold">XAUT</span> on Solana?</h2>
+        <p class="section-subtitle">The gold standard of DeFi — now with 10B supply and Solana speed</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 2.8rem; margin-bottom: 12px;">🥇</div>
+                <h3 style="font-size: 1.1rem; color: #fff;">Gold Standard</h3>
+                <p style="font-size: 0.9rem; color: #888;">Each token backed by physical gold.</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 2.8rem; margin-bottom: 12px;">⚡</div>
+                <h3 style="font-size: 1.1rem; color: #fff;">Solana Speed</h3>
+                <p style="font-size: 0.9rem; color: #888;">Transactions in under 0.5 seconds.</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 2.8rem; margin-bottom: 12px;">🔒</div>
+                <h3 style="font-size: 1.1rem; color: #fff;">Maximum Security</h3>
+                <p style="font-size: 0.9rem; color: #888;">Built on Solana's secure infrastructure.</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 2.8rem; margin-bottom: 12px;">🌐</div>
+                <h3 style="font-size: 1.1rem; color: #fff;">DeFi Ready</h3>
+                <p style="font-size: 0.9rem; color: #888;">Use as collateral or stake on DEXs.</p>
+            </div>
+        </div>
     </div>
-    <div class="stat-item">
-        <div class="number">🔒</div>
-        <div class="label">Gold-Backed</div>
+</section>
+
+<!-- ===== VIDEO ===== -->
+<section style="padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.04);">
+    <div class="container">
+        <h2 class="section-title">Watch <span class="text-gold">XAUT</span> in Action</h2>
+        <p class="section-subtitle">See how digital gold is transforming DeFi on Solana</p>
+        <div style="max-width: 800px; margin: 0 auto; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);">
+            <video controls style="width: 100%; display: block;">
+                <source src="https://raw.githubusercontent.com/goldtether/xaut/main/Tether%20Gold%20XAU%E2%82%AE_%20Real%20Gold-1.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTRACT ===== -->
+<div style="text-align: center; padding: 20px 0 40px;">
+    <p style="color: #666; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;">Contract Address</p>
+    <code style="background: rgba(255,255,255,0.03); padding: 12px 28px; border-radius: 60px; font-size: 0.8rem; color: #aaa; border: 1px solid rgba(255,255,255,0.04); display: inline-block; word-break: break-all; max-width: 100%;">
+        54cupsRcuquPgWqJRuS95kVub44qyMh5ZxhxVTnoQuBM
+    </code>
+    <div style="margin-top: 12px;">
+        <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank" style="color: #f9a825; font-weight: 500;">
+            View Pool on GeckoTerminal 🔗
+        </a>
     </div>
 </div>
 
-<section class="about" id="about">
-    <div class="container">
-        <h2>Why <span style="color:#f9a825;">XAUT</span> on Solana?</h2>
-        <p class="sub">The gold standard of DeFi — now with 10B supply and Solana speed</p>
-        <div class="about-grid">
-            <div class="about-card">
-                <div class="icon">🥇</div>
-                <h3>Gold Standard</h3>
-                <p>XAUT brings the power of physical gold to DeFi. Stake, borrow, and trade with true value.</p>
-            </div>
-            <div class="about-card">
-                <div class="icon">⚡</div>
-                <h3>Solana Speed</h3>
-                <p>Transactions in under 0.5 seconds with fees under $0.001 — faster than gold.</p>
-            </div>
-            <div class="about-card">
-                <div class="icon">🔒</div>
-                <h3>Maximum Security</h3>
-                <p>Built on Solana's secure infrastructure with full transparency.</p>
-            </div>
-            <div class="about-card">
-                <div class="icon">🌐</div>
-                <h3>DeFi Ready</h3>
-                <p>Use XAUT as collateral, stake it, or trade it on Meteora and other DEXs.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="partners">
-    <div class="container">
-        <h2>Powered By</h2>
-        <div class="partners-grid">
-            <div class="partner-item"><span class="icon">🔷</span> Solana</div>
-            <div class="partner-item"><span class="icon">🌊</span> Meteora</div>
-            <div class="partner-item"><span class="icon">🥇</span> XAUT</div>
-        </div>
-    </div>
-</section>
-
-<section class="reserves" id="reserves">
-    <div class="container">
-        <h2>Tokenomics</h2>
-        <p class="sub">10B supply with 0.25% transfer fee</p>
-        <div class="reserves-grid">
-            <div class="reserves-card">
-                <div class="number">10B</div>
-                <div class="label">Total Supply</div>
-            </div>
-            <div class="reserves-card">
-                <div class="number">0.25%</div>
-                <div class="label">Transfer Fee</div>
-            </div>
-            <div class="reserves-card">
-                <div class="number">Token 2022</div>
-                <div class="label">SPL Standard</div>
-            </div>
-            <div class="reserves-card">
-                <div class="number">🔓</div>
-                <div class="label">Update Authority</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div class="container contract-box">
-    <div class="label">Contract Address</div>
-    <code>54cupsRcuquPgWqJRuS95kVub44qyMh5ZxhxVTnoQuBM</code>
-    <div class="pool-link">
-        🔗 <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">View Pool on GeckoTerminal</a>
-    </div>
-</div>
-
+<!-- ===== FOOTER ===== -->
 <footer>
     <div class="container">
         <div class="socials">
-            <a href="#" target="_blank">🐦 Twitter</a>
+            <a href="https://x.com/xautgold" target="_blank">🐦 Twitter</a>
             <a href="#" target="_blank">💬 Telegram</a>
             <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
             <a href="#" target="_blank">📈 CoinGecko</a>
@@ -487,5 +138,38 @@
     </div>
 </footer>
 
+<!-- ===== COUNTERS SCRIPT ===== -->
+<script>
+    (function() {
+        const TARGET_CLIENTS = 1547;
+        const TARGET_TRADES = 10234;
+        let currentClients = 0;
+        let currentTrades = 0;
+
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function updateCounters() {
+            if (currentClients < TARGET_CLIENTS) {
+                currentClients = Math.min(currentClients + Math.floor(Math.random() * 5) + 1, TARGET_CLIENTS);
+                document.getElementById('clientCount').textContent = formatNumber(currentClients);
+            }
+            if (currentTrades < TARGET_TRADES) {
+                currentTrades = Math.min(currentTrades + Math.floor(Math.random() * 15) + 3, TARGET_TRADES);
+                document.getElementById('tradeCount').textContent = formatNumber(currentTrades);
+            }
+        }
+
+        setInterval(updateCounters, 50);
+
+        setTimeout(() => {
+            currentClients = Math.floor(TARGET_CLIENTS * 0.3);
+            currentTrades = Math.floor(TARGET_TRADES * 0.2);
+            document.getElementById('clientCount').textContent = formatNumber(currentClients);
+            document.getElementById('tradeCount').textContent = formatNumber(currentTrades);
+        }, 100);
+    })();
+</script>
 </body>
 </html>
