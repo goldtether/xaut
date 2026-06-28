@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pool — XAUT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .pool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+        .pool-grid .card { padding: 24px; }
+        .pool-stats { display: flex; flex-direction: column; gap: 12px; }
+        .pool-stats .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .pool-stats .row .label { color: #888; }
+        .pool-stats .row .value { color: #fff; font-weight: 500; }
+        .chart-container { height: 300px; }
+        @media (max-width: 700px) { .pool-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<header>
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="XAUT">
+            <span>XAUT</span>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="tokenomics.html">Tokenomics</a>
+            <a href="reserves.html">Reserves</a>
+            <a href="pool.html" class="active">Pool</a>
+            <a href="staking.html">Staking</a>
+            <a href="buy.html">Buy</a>
+            <a href="blog.html">Blog</a>
+            <a href="team.html">Team</a>
+            <a href="contact.html">Contact</a>
+            <a href="gallery.html">Gallery</a>
+            <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
+        </nav>
+    </div>
+</header>
+
+<section style="padding: 120px 0 60px;">
+    <div class="container">
+        <h1 class="section-title"><span class="text-gold">Liquidity</span> Pool</h1>
+        <p class="section-subtitle">XAUT/EURI pool on Meteora — trade with low fees and deep liquidity</p>
+    </div>
+</section>
+
+<section style="padding: 20px 0 60px;">
+    <div class="container">
+        <div class="pool-grid">
+            <div class="card">
+                <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 16px;">Pool Stats</h3>
+                <div class="pool-stats">
+                    <div class="row"><span class="label">Platform</span><span class="value">Meteora DAMM V2</span></div>
+                    <div class="row"><span class="label">Pair</span><span class="value">XAUT/EURI</span></div>
+                    <div class="row"><span class="label">Current Price</span><span class="value">$0.01</span></div>
+                    <div class="row"><span class="label">24h Volume</span><span class="value">$0.00</span></div>
+                    <div class="row"><span class="label">TVL</span><span class="value">$0.00</span></div>
+                    <div class="row"><span class="label">Trading Fee</span><span class="value">0.25394%</span></div>
+                </div>
+                <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank" class="btn-gold" style="display: block; text-align: center; margin-top: 16px;">View on GeckoTerminal 🔗</a>
+            </div>
+            <div class="card">
+                <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 16px;">Price Chart</h3>
+                <div class="chart-container">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    const labels = [];
+    const prices = [];
+    let price = 0.0095;
+    for (let i = 0; i < 30; i++) {
+        labels.push(`Day ${i+1}`);
+        price += (Math.random() - 0.45) * 0.001;
+        price = Math.max(price, 0.008);
+        price = Math.min(price, 0.015);
+        prices.push(price);
+    }
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'XAUT Price (USD)',
+                data: prices,
+                borderColor: '#f9a825',
+                backgroundColor: 'rgba(249,168,37,0.1)',
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#f9a825',
+                pointBorderColor: '#0a0a0a',
+                pointBorderWidth: 2,
+                pointRadius: 3,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#888' } },
+            },
+            scales: {
+                x: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#666', font: { size: 10 } } },
+                y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#666', font: { size: 10 }, callback: (v) => `$${v.toFixed(4)}` } }
+            }
+        }
+    });
+</script>
+
+<footer>
+    <div class="container">
+        <div class="socials">
+            <a href="https://x.com/xautgold" target="_blank">🐦 Twitter</a>
+            <a href="#" target="_blank">💬 Telegram</a>
+            <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
+            <a href="#" target="_blank">📈 CoinGecko</a>
+        </div>
+        <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
+    </div>
+</footer>
+
+</body>
+</html>
