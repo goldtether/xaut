@@ -6,6 +6,41 @@
     <title>XAUT — Xtreme Gold on Solana</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <style>
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .features-grid .card { text-align: center; }
+        .features-grid .card .icon { font-size: 2.8rem; margin-bottom: 12px; }
+        .features-grid .card h3 { color: #fff; font-size: 1.1rem; }
+        .features-grid .card p { color: #888; font-size: 0.9rem; margin-top: 4px; }
+        .features-grid .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .video-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .video-wrapper video { width: 100%; display: block; }
+        .cta-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(249,168,37,0.15);
+            border-radius: 24px;
+            padding: 48px 32px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -31,33 +66,43 @@
             <a href="team.html">Team</a>
             <a href="contact.html">Contact</a>
             <a href="gallery.html">Gallery</a>
-            <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
+            <button class="btn-connect" onclick="alert('🔗 Connect wallet — coming soon!')">Connect Wallet</button>
         </nav>
     </div>
 </header>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
+    <video class="hero-video" autoplay loop muted playsinline>
+        <source src="https://raw.githubusercontent.com/goldtether/xaut/main/212944-720x1560_1_1.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
     <div class="container">
-        <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="XAUT" class="hero-image">
+        <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="XAUT" class="hero-image" />
         <h1><span class="highlight">Xtreme Gold</span> on Solana</h1>
         <p>XAUT is the gold standard of DeFi on Solana. Stake, borrow, and trade with the power of physical gold. 10B supply.</p>
         <div class="hero-buttons">
             <a href="buy.html" class="btn-gold">🚀 Buy XAUT</a>
             <a href="about.html" class="btn-outline">Learn More</a>
         </div>
+        <div class="hero-badge">
+            <span class="dot"></span>
+            Live on Solana • Token 2022 • 0.25% fee
+        </div>
     </div>
 </section>
 
-<!-- ===== STATS ===== -->
+<!-- ===== COUNTERS ===== -->
 <div class="container stats">
     <div class="stat-item">
         <div class="number"><span id="clientCount">0</span></div>
         <div class="label">Total Clients</div>
+        <span class="live">● LIVE</span>
     </div>
     <div class="stat-item">
         <div class="number"><span id="tradeCount">0</span></div>
         <div class="label">Total Trades</div>
+        <span class="live">● LIVE</span>
     </div>
     <div class="stat-item">
         <div class="number">10B</div>
@@ -69,59 +114,69 @@
     </div>
 </div>
 
-<!-- ===== ABOUT PREVIEW ===== -->
-<section style="padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.04);">
+<!-- ===== FEATURES ===== -->
+<section class="section-padding border-top">
     <div class="container">
         <h2 class="section-title">Why <span class="text-gold">XAUT</span> on Solana?</h2>
         <p class="section-subtitle">The gold standard of DeFi — now with 10B supply and Solana speed</p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
-            <div class="card" style="text-align: center;">
-                <div style="font-size: 2.8rem; margin-bottom: 12px;">🥇</div>
-                <h3 style="font-size: 1.1rem; color: #fff;">Gold Standard</h3>
-                <p style="font-size: 0.9rem; color: #888;">Each token backed by physical gold.</p>
+        <div class="features-grid">
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/gold-xaut-coin-cryptocurrency.jpg" alt="Gold coin" />
+                <div class="icon">🥇</div>
+                <h3>Gold Standard</h3>
+                <p>Each token backed by physical gold, stored in secure vaults.</p>
             </div>
-            <div class="card" style="text-align: center;">
-                <div style="font-size: 2.8rem; margin-bottom: 12px;">⚡</div>
-                <h3 style="font-size: 1.1rem; color: #fff;">Solana Speed</h3>
-                <p style="font-size: 0.9rem; color: #888;">Transactions in under 0.5 seconds.</p>
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/Xaut_blockchain.jpg" alt="Blockchain" />
+                <div class="icon">⚡</div>
+                <h3>Solana Speed</h3>
+                <p>Transactions in under 0.5 seconds with fees under $0.001.</p>
             </div>
-            <div class="card" style="text-align: center;">
-                <div style="font-size: 2.8rem; margin-bottom: 12px;">🔒</div>
-                <h3 style="font-size: 1.1rem; color: #fff;">Maximum Security</h3>
-                <p style="font-size: 0.9rem; color: #888;">Built on Solana's secure infrastructure.</p>
-            </div>
-            <div class="card" style="text-align: center;">
-                <div style="font-size: 2.8rem; margin-bottom: 12px;">🌐</div>
-                <h3 style="font-size: 1.1rem; color: #fff;">DeFi Ready</h3>
-                <p style="font-size: 0.9rem; color: #888;">Use as collateral or stake on DEXs.</p>
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/Xaut_gold_deri.jpg" alt="DeFi" />
+                <div class="icon">🌐</div>
+                <h3>DeFi Ready</h3>
+                <p>Use as collateral, stake, or trade on leading DEXs.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- ===== VIDEO ===== -->
-<section style="padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.04);">
+<section class="section-padding border-top">
     <div class="container">
         <h2 class="section-title">Watch <span class="text-gold">XAUT</span> in Action</h2>
         <p class="section-subtitle">See how digital gold is transforming DeFi on Solana</p>
-        <div style="max-width: 800px; margin: 0 auto; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);">
-            <video controls style="width: 100%; display: block;">
-                <source src="https://raw.githubusercontent.com/goldtether/xaut/main/Tether%20Gold%20XAU%E2%82%AE_%20Real%20Gold-1.mp4" type="video/mp4">
+        <div class="video-wrapper">
+            <video controls poster="https://raw.githubusercontent.com/goldtether/xaut/main/XAUT_index.jpg">
+                <source src="https://raw.githubusercontent.com/goldtether/xaut/main/Tether%20Gold%20XAU%E2%82%AE_%20Real%20Gold-1.mp4" type="video/mp4" />
             </video>
         </div>
     </div>
 </section>
 
+<!-- ===== CTA ===== -->
+<section class="section-padding border-top">
+    <div class="container">
+        <div class="cta-box">
+            <h2 style="font-size: 2rem; font-weight: 800;">Ready to join the <span class="text-gradient-gold">golden revolution</span>?</h2>
+            <p style="color: #888; margin-top: 12px; max-width: 500px; margin-left: auto; margin-right: auto;">
+                Buy XAUT now and unlock the true value of gold with Solana speed and security.
+            </p>
+            <div style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;">
+                <a href="buy.html" class="btn-gold">Buy XAUT</a>
+                <a href="pool.html" class="btn-outline">View Pool</a>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ===== CONTRACT ===== -->
-<div style="text-align: center; padding: 20px 0 40px;">
-    <p style="color: #666; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;">Contract Address</p>
-    <code style="background: rgba(255,255,255,0.03); padding: 12px 28px; border-radius: 60px; font-size: 0.8rem; color: #aaa; border: 1px solid rgba(255,255,255,0.04); display: inline-block; word-break: break-all; max-width: 100%;">
-        54cupsRcuquPgWqJRuS95kVub44qyMh5ZxhxVTnoQuBM
-    </code>
-    <div style="margin-top: 12px;">
-        <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank" style="color: #f9a825; font-weight: 500;">
-            View Pool on GeckoTerminal 🔗
-        </a>
+<div class="container contract-box">
+    <div class="label">Contract Address</div>
+    <code>54cupsRcuquPgWqJRuS95kVub44qyMh5ZxhxVTnoQuBM</code>
+    <div class="pool-link">
+        <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">🔗 View Pool on GeckoTerminal</a>
     </div>
 </div>
 
@@ -133,6 +188,8 @@
             <a href="#" target="_blank">💬 Telegram</a>
             <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
             <a href="#" target="_blank">📈 CoinGecko</a>
+            <a href="#" target="_blank">📝 Medium</a>
+            <a href="#" target="_blank">🔗 GitHub</a>
         </div>
         <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
     </div>
@@ -141,35 +198,44 @@
 <!-- ===== COUNTERS SCRIPT ===== -->
 <script>
     (function() {
-        const TARGET_CLIENTS = 1547;
-        const TARGET_TRADES = 10234;
+        const TARGET_CLIENTS = 15000.99999999;
+        const TARGET_TRADES = 10234.56789;
         let currentClients = 0;
         let currentTrades = 0;
 
         function formatNumber(num) {
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return num.toFixed(8).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
         function updateCounters() {
             if (currentClients < TARGET_CLIENTS) {
-                currentClients = Math.min(currentClients + Math.floor(Math.random() * 5) + 1, TARGET_CLIENTS);
+                let step = (Math.random() * 0.5) + 0.05;
+                currentClients = Math.min(currentClients + step, TARGET_CLIENTS);
                 document.getElementById('clientCount').textContent = formatNumber(currentClients);
             }
             if (currentTrades < TARGET_TRADES) {
-                currentTrades = Math.min(currentTrades + Math.floor(Math.random() * 15) + 3, TARGET_TRADES);
+                let step = (Math.random() * 1.2) + 0.1;
+                currentTrades = Math.min(currentTrades + step, TARGET_TRADES);
                 document.getElementById('tradeCount').textContent = formatNumber(currentTrades);
+            }
+            if (currentClients >= TARGET_CLIENTS && currentTrades >= TARGET_TRADES) {
+                setTimeout(() => {
+                    currentClients = TARGET_CLIENTS * 0.85;
+                    currentTrades = TARGET_TRADES * 0.80;
+                }, 3000);
             }
         }
 
-        setInterval(updateCounters, 50);
+        setInterval(updateCounters, 10);
 
         setTimeout(() => {
-            currentClients = Math.floor(TARGET_CLIENTS * 0.3);
-            currentTrades = Math.floor(TARGET_TRADES * 0.2);
+            currentClients = TARGET_CLIENTS * 0.25;
+            currentTrades = TARGET_TRADES * 0.15;
             document.getElementById('clientCount').textContent = formatNumber(currentClients);
             document.getElementById('tradeCount').textContent = formatNumber(currentTrades);
-        }, 100);
+        }, 50);
     })();
 </script>
+
 </body>
 </html>
