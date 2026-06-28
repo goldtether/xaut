@@ -7,12 +7,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <style>
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 40px; }
-        .team-grid .card { text-align: center; padding: 24px; }
-        .team-grid .card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(249,168,37,0.3); margin-bottom: 12px; }
-        .team-grid .card h3 { color: #fff; font-size: 1.1rem; }
-        .team-grid .card .role { color: #f9a825; font-size: 0.85rem; }
-        .team-grid .card p { color: #888; font-size: 0.85rem; margin-top: 4px; }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .team-grid .card {
+            text-align: center;
+            padding: 28px 20px 24px;
+            transition: 0.4s;
+        }
+        .team-grid .card:hover { transform: translateY(-8px); }
+        .team-grid .card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(249,168,37,0.25);
+            margin-bottom: 14px;
+            transition: 0.4s;
+        }
+        .team-grid .card:hover img { border-color: #f9a825; transform: scale(1.02); }
+        .team-grid .card h3 { color: #fff; font-size: 1.15rem; }
+        .team-grid .card .role { color: #f9a825; font-size: 0.85rem; font-weight: 500; }
+        .team-grid .card p { color: #888; font-size: 0.85rem; margin-top: 6px; }
+        .team-grid .card .social-links { display: flex; justify-content: center; gap: 14px; margin-top: 12px; }
+        .team-grid .card .social-links a { color: #666; font-size: 1.1rem; transition: 0.3s; }
+        .team-grid .card .social-links a:hover { color: #f9a825; transform: translateY(-2px); }
+        .team-cta {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(249,168,37,0.08);
+            border-radius: 24px;
+            padding: 40px 32px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        @media (max-width: 480px) { .team-grid { grid-template-columns: 1fr 1fr; } }
     </style>
 </head>
 <body>
@@ -20,6 +51,7 @@
 <div class="glow glow-1"></div>
 <div class="glow glow-2"></div>
 
+<!-- ===== HEADER ===== -->
 <header>
     <div class="container header-inner">
         <a href="index.html" class="logo">
@@ -38,49 +70,107 @@
             <a href="team.html" class="active">Team</a>
             <a href="contact.html">Contact</a>
             <a href="gallery.html">Gallery</a>
-            <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
+            <button class="btn-connect" onclick="alert('🔗 Connect wallet — coming soon!')">Connect Wallet</button>
         </nav>
     </div>
 </header>
 
-<section style="padding: 120px 0 60px;">
+<!-- ===== HERO ===== -->
+<section style="padding: 120px 0 40px;">
     <div class="container">
         <h1 class="section-title"><span class="text-gold">Team</span></h1>
         <p class="section-subtitle">The people behind XAUT — building the gold standard of DeFi</p>
     </div>
 </section>
 
+<!-- ===== TEAM ===== -->
 <section style="padding: 20px 0 60px;">
     <div class="container">
         <div class="team-grid">
             <div class="card">
-                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="Founder" />
-                <h3>Alexander Volkov</h3>
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="Michael Gold" />
+                <h3>Michael Gold</h3>
                 <div class="role">CEO & Founder</div>
-                <p>10+ years in blockchain and gold markets.</p>
+                <p>15+ years in gold trading and blockchain. Former VP at GoldTrust.</p>
+                <div class="social-links">
+                    <a href="#" title="Twitter">🐦</a>
+                    <a href="#" title="LinkedIn">🔗</a>
+                </div>
             </div>
             <div class="card">
-                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="CTO" />
-                <h3>Maria Petrova</h3>
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="Elena Sokolova" />
+                <h3>Elena Sokolova</h3>
                 <div class="role">CTO</div>
-                <p>Solana core contributor, smart contract expert.</p>
+                <p>Solana core contributor, ex-Google. PhD in Distributed Systems.</p>
+                <div class="social-links">
+                    <a href="#" title="Twitter">🐦</a>
+                    <a href="#" title="GitHub">💻</a>
+                </div>
             </div>
             <div class="card">
-                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="DeFi Lead" />
-                <h3>David Chen</h3>
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="James Park" />
+                <h3>James Park</h3>
                 <div class="role">DeFi Lead</div>
-                <p>Former DeFi strategist at major protocols.</p>
+                <p>Built DeFi protocols with $500M+ TVL. Former Head of DeFi at XYZ.</p>
+                <div class="social-links">
+                    <a href="#" title="Twitter">🐦</a>
+                    <a href="#" title="LinkedIn">🔗</a>
+                </div>
             </div>
             <div class="card">
-                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="Community" />
-                <h3>Sarah Williams</h3>
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="Anna Weber" />
+                <h3>Anna Weber</h3>
                 <div class="role">Community Manager</div>
-                <p>Building the XAUT community worldwide.</p>
+                <p>Leading crypto communities since 2019. Expert in Web3 engagement.</p>
+                <div class="social-links">
+                    <a href="#" title="Twitter">🐦</a>
+                    <a href="#" title="Telegram">💬</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="David Kim" />
+                <h3>David Kim</h3>
+                <div class="role">Gold Strategist</div>
+                <p>10 years in precious metals markets. Advisor to multiple gold funds.</p>
+                <div class="social-links">
+                    <a href="#" title="LinkedIn">🔗</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="Sarah Chen" />
+                <h3>Sarah Chen</h3>
+                <div class="role">Product Manager</div>
+                <p>Ex-Meta, product lead for Web3 wallets. Passionate about DeFi adoption.</p>
+                <div class="social-links">
+                    <a href="#" title="Twitter">🐦</a>
+                    <a href="#" title="LinkedIn">🔗</a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- ===== CTA ===== -->
+<section style="padding: 20px 0 40px; border-top: 1px solid rgba(255,255,255,0.04);">
+    <div class="container">
+        <div class="team-cta">
+            <h3 style="font-size: 1.6rem; font-weight: 800; color: #fff;">Join the <span class="text-gradient-gold">XAUT</span> Team</h3>
+            <p style="color: #888; max-width: 500px; margin: 12px auto 0;">We're always looking for talented people to join our mission. Check our careers page.</p>
+            <a href="#" class="btn-outline" style="display: inline-block; margin-top: 16px;">View Open Positions</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTRACT ===== -->
+<div class="container contract-box">
+    <div class="label">Contract Address</div>
+    <code>54cupsRcuquPgWqJRuS95kVub44qyMh5ZxhxVTnoQuBM</code>
+    <div class="pool-link">
+        <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">🔗 View Pool on GeckoTerminal</a>
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
 <footer>
     <div class="container">
         <div class="socials">
@@ -88,6 +178,8 @@
             <a href="#" target="_blank">💬 Telegram</a>
             <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
             <a href="#" target="_blank">📈 CoinGecko</a>
+            <a href="#" target="_blank">📝 Medium</a>
+            <a href="#" target="_blank">🔗 GitHub</a>
         </div>
         <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
     </div>
