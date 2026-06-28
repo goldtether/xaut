@@ -7,14 +7,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <style>
-        .about-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px; }
-        .about-features .card { text-align: center; }
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-top: 40px;
+        }
+        .mission-grid img {
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .mission-grid h2 { font-size: 2.2rem; color: #fff; }
+        .mission-grid p { color: #888; margin-top: 16px; line-height: 1.8; }
+        .mission-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+        .mission-badges span {
+            background: rgba(249,168,37,0.1);
+            padding: 6px 18px;
+            border-radius: 40px;
+            color: #f9a825;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .about-features .card { text-align: center; padding: 32px 20px; }
         .about-features .card .icon { font-size: 2.8rem; margin-bottom: 12px; }
         .about-features .card h3 { color: #fff; font-size: 1.1rem; }
         .about-features .card p { color: #888; font-size: 0.9rem; margin-top: 4px; }
-        .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-top: 40px; }
-        .mission-grid img { border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); width: 100%; }
-        @media (max-width: 700px) { .mission-grid { grid-template-columns: 1fr; } }
+        .vision-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(249,168,37,0.12);
+            border-radius: 24px;
+            padding: 48px 32px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) { .mission-grid { grid-template-columns: 1fr; gap: 30px; } }
     </style>
 </head>
 <body>
@@ -22,6 +56,7 @@
 <div class="glow glow-1"></div>
 <div class="glow glow-2"></div>
 
+<!-- ===== HEADER ===== -->
 <header>
     <div class="container header-inner">
         <a href="index.html" class="logo">
@@ -40,36 +75,41 @@
             <a href="team.html">Team</a>
             <a href="contact.html">Contact</a>
             <a href="gallery.html">Gallery</a>
-            <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
+            <button class="btn-connect" onclick="alert('🔗 Connect wallet — coming soon!')">Connect Wallet</button>
         </nav>
     </div>
 </header>
 
-<section style="padding: 120px 0 60px;">
+<!-- ===== HERO ===== -->
+<section style="padding: 120px 0 40px;">
     <div class="container">
         <h1 class="section-title">About <span class="text-gold">XAUT</span></h1>
         <p class="section-subtitle">The gold standard of DeFi on Solana — bringing physical gold to the digital age</p>
     </div>
 </section>
 
+<!-- ===== MISSION ===== -->
 <section style="padding: 20px 0 60px;">
     <div class="container">
         <div class="mission-grid">
             <img src="https://raw.githubusercontent.com/goldtether/xaut/main/XAUT_gold_bars.jpg" alt="Gold Bars" />
             <div>
-                <h2 style="font-size: 2rem; color: #fff;">Our Mission</h2>
-                <p style="color: #888; margin-top: 16px;">To democratize access to gold by tokenizing it on Solana. XAUT combines the timeless value of gold with the speed, security, and innovation of blockchain technology.</p>
-                <p style="color: #888; margin-top: 12px;">We believe that everyone should have access to the stability and security of gold, without the barriers of traditional gold ownership.</p>
-                <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 20px;">
-                    <span style="background: rgba(249,168,37,0.1); padding: 6px 16px; border-radius: 40px; color: #f9a825; font-size: 0.85rem;">10B Supply</span>
-                    <span style="background: rgba(249,168,37,0.1); padding: 6px 16px; border-radius: 40px; color: #f9a825; font-size: 0.85rem;">Token 2022</span>
-                    <span style="background: rgba(249,168,37,0.1); padding: 6px 16px; border-radius: 40px; color: #f9a825; font-size: 0.85rem;">0.25% Fee</span>
+                <h2>Our Mission</h2>
+                <p>To democratize access to gold by tokenizing it on Solana. XAUT combines the timeless value of gold with the speed, security, and innovation of blockchain technology.</p>
+                <p>We believe that everyone should have access to the stability and security of gold, without the barriers of traditional gold ownership.</p>
+                <div class="mission-badges">
+                    <span>10B Supply</span>
+                    <span>Token 2022</span>
+                    <span>0.25% Fee</span>
+                    <span>Gold-Backed</span>
+                    <span>DeFi Ready</span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- ===== FEATURES ===== -->
 <section style="padding: 40px 0 60px; border-top: 1px solid rgba(255,255,255,0.04);">
     <div class="container">
         <h2 class="section-title">Why <span class="text-gold">XAUT</span>?</h2>
@@ -84,6 +124,26 @@
     </div>
 </section>
 
+<!-- ===== VISION ===== -->
+<section style="padding: 40px 0 60px; border-top: 1px solid rgba(255,255,255,0.04);">
+    <div class="container">
+        <div class="vision-box">
+            <h2 style="font-size: 2rem; font-weight: 800;">The Future of <span class="text-gradient-gold">Digital Gold</span></h2>
+            <p style="color: #888; max-width: 700px; margin: 16px auto 0;">XAUT is more than a token — it's a movement to bring the stability of gold to the decentralized world. Join us in building the gold standard of DeFi.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTRACT ===== -->
+<div class="container contract-box">
+    <div class="label">Contract Address</div>
+    <code>54cupsRcuquPgWqJRuS95kVub44qyMh5ZxhxVTnoQuBM</code>
+    <div class="pool-link">
+        <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">🔗 View Pool on GeckoTerminal</a>
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
 <footer>
     <div class="container">
         <div class="socials">
@@ -91,6 +151,8 @@
             <a href="#" target="_blank">💬 Telegram</a>
             <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
             <a href="#" target="_blank">📈 CoinGecko</a>
+            <a href="#" target="_blank">📝 Medium</a>
+            <a href="#" target="_blank">🔗 GitHub</a>
         </div>
         <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
     </div>
