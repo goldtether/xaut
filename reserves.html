@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reserves — XAUT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .reserves-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 40px; }
+        .reserves-grid .card { text-align: center; }
+        .reserves-grid .card .number { font-size: 2rem; font-weight: 800; color: #f9a825; }
+        .reserves-grid .card .label { color: #888; font-size: 0.85rem; }
+        .audit-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+        .audit-item { display: flex; justify-content: space-between; padding: 16px 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; }
+        .audit-item .status { color: #4caf50; }
+        .audit-item .status.pending { color: #f9a825; }
+        @media (max-width: 700px) { .audit-list { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<header>
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="XAUT">
+            <span>XAUT</span>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="tokenomics.html">Tokenomics</a>
+            <a href="reserves.html" class="active">Reserves</a>
+            <a href="pool.html">Pool</a>
+            <a href="staking.html">Staking</a>
+            <a href="buy.html">Buy</a>
+            <a href="blog.html">Blog</a>
+            <a href="team.html">Team</a>
+            <a href="contact.html">Contact</a>
+            <a href="gallery.html">Gallery</a>
+            <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
+        </nav>
+    </div>
+</header>
+
+<section style="padding: 120px 0 60px;">
+    <div class="container">
+        <h1 class="section-title"><span class="text-gold">Gold Reserves</span></h1>
+        <p class="section-subtitle">Fully transparent and regularly audited gold reserves</p>
+    </div>
+</section>
+
+<section style="padding: 20px 0 60px;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+            <img src="https://raw.githubusercontent.com/goldtether/xaut/main/XAUT_gold_silver_bars.jpg" alt="Gold and Silver Bars" style="border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); width: 100%;" />
+            <div>
+                <h2 style="font-size: 2rem; color: #fff;">Physical Gold Backing</h2>
+                <p style="color: #888; margin-top: 16px;">Each XAUT token is backed by one gram of physical gold, stored in secure vaults. Our reserves are fully transparent and regularly audited by independent third parties.</p>
+                <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;"><span style="color: #f9a825;">🔒</span> <span style="color: #ccc;">Secure vault storage</span></div>
+                    <div style="display: flex; align-items: center; gap: 12px;"><span style="color: #f9a825;">🛡️</span> <span style="color: #ccc;">100% gold-backed</span></div>
+                    <div style="display: flex; align-items: center; gap: 12px;"><span style="color: #f9a825;">📊</span> <span style="color: #ccc;">Regular audits</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section style="padding: 40px 0 60px; border-top: 1px solid rgba(255,255,255,0.04);">
+    <div class="container">
+        <h2 class="section-title"><span class="text-gold">Audits</span> & Transparency</h2>
+        <div class="audit-list">
+            <div class="audit-item"><span style="color: #fff;">Solana Security Audit</span><span class="status">✅ Completed</span></div>
+            <div class="audit-item"><span style="color: #fff;">Gold Reserve Audit</span><span class="status">✅ Completed</span></div>
+            <div class="audit-item"><span style="color: #fff;">Smart Contract Audit</span><span class="status pending">⏳ In Progress</span></div>
+            <div class="audit-item"><span style="color: #fff;">Tokenomics Review</span><span class="status">✅ Completed</span></div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="socials">
+            <a href="https://x.com/xautgold" target="_blank">🐦 Twitter</a>
+            <a href="#" target="_blank">💬 Telegram</a>
+            <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
+            <a href="#" target="_blank">📈 CoinGecko</a>
+        </div>
+        <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
+    </div>
+</footer>
+
+</body>
+</html>
