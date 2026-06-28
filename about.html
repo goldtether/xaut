@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About — XAUT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .about-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px; }
+        .about-features .card { text-align: center; }
+        .about-features .card .icon { font-size: 2.8rem; margin-bottom: 12px; }
+        .about-features .card h3 { color: #fff; font-size: 1.1rem; }
+        .about-features .card p { color: #888; font-size: 0.9rem; margin-top: 4px; }
+        .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-top: 40px; }
+        .mission-grid img { border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); width: 100%; }
+        @media (max-width: 700px) { .mission-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<header>
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="XAUT">
+            <span>XAUT</span>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active">About</a>
+            <a href="tokenomics.html">Tokenomics</a>
+            <a href="reserves.html">Reserves</a>
+            <a href="pool.html">Pool</a>
+            <a href="staking.html">Staking</a>
+            <a href="buy.html">Buy</a>
+            <a href="blog.html">Blog</a>
+            <a href="team.html">Team</a>
+            <a href="contact.html">Contact</a>
+            <a href="gallery.html">Gallery</a>
+            <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
+        </nav>
+    </div>
+</header>
+
+<section style="padding: 120px 0 60px;">
+    <div class="container">
+        <h1 class="section-title">About <span class="text-gold">XAUT</span></h1>
+        <p class="section-subtitle">The gold standard of DeFi on Solana — bringing physical gold to the digital age</p>
+    </div>
+</section>
+
+<section style="padding: 20px 0 60px;">
+    <div class="container">
+        <div class="mission-grid">
+            <img src="https://raw.githubusercontent.com/goldtether/xaut/main/XAUT_gold_bars.jpg" alt="Gold Bars" />
+            <div>
+                <h2 style="font-size: 2rem; color: #fff;">Our Mission</h2>
+                <p style="color: #888; margin-top: 16px;">To democratize access to gold by tokenizing it on Solana. XAUT combines the timeless value of gold with the speed, security, and innovation of blockchain technology.</p>
+                <p style="color: #888; margin-top: 12px;">We believe that everyone should have access to the stability and security of gold, without the barriers of traditional gold ownership.</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 20px;">
+                    <span style="background: rgba(249,168,37,0.1); padding: 6px 16px; border-radius: 40px; color: #f9a825; font-size: 0.85rem;">10B Supply</span>
+                    <span style="background: rgba(249,168,37,0.1); padding: 6px 16px; border-radius: 40px; color: #f9a825; font-size: 0.85rem;">Token 2022</span>
+                    <span style="background: rgba(249,168,37,0.1); padding: 6px 16px; border-radius: 40px; color: #f9a825; font-size: 0.85rem;">0.25% Fee</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section style="padding: 40px 0 60px; border-top: 1px solid rgba(255,255,255,0.04);">
+    <div class="container">
+        <h2 class="section-title">Why <span class="text-gold">XAUT</span>?</h2>
+        <div class="about-features">
+            <div class="card"><div class="icon">🥇</div><h3>100% Gold-Backed</h3><p>Each XAUT token is backed by one gram of physical gold, stored in secure vaults.</p></div>
+            <div class="card"><div class="icon">⚡</div><h3>Solana Speed</h3><p>Transactions in under 0.5 seconds with fees under $0.001.</p></div>
+            <div class="card"><div class="icon">🔒</div><h3>Maximum Security</h3><p>Built on Solana's secure infrastructure with full transparency.</p></div>
+            <div class="card"><div class="icon">🌐</div><h3>DeFi Ready</h3><p>Use XAUT as collateral, stake it, or trade it on leading DEXs.</p></div>
+            <div class="card"><div class="icon">📊</div><h3>10B Supply</h3><p>Large supply for maximum accessibility and liquidity.</p></div>
+            <div class="card"><div class="icon">💎</div><h3>0.25% Transfer Fee</h3><p>Low transfer fee to incentivize usage while supporting the ecosystem.</p></div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="socials">
+            <a href="https://x.com/xautgold" target="_blank">🐦 Twitter</a>
+            <a href="#" target="_blank">💬 Telegram</a>
+            <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
+            <a href="#" target="_blank">📈 CoinGecko</a>
+        </div>
+        <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
+    </div>
+</footer>
+
+</body>
+</html>
