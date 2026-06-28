@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog — XAUT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px; }
+        .blog-grid .card { overflow: hidden; padding: 0; }
+        .blog-grid .card img { width: 100%; height: 200px; object-fit: cover; }
+        .blog-grid .card .content { padding: 20px; }
+        .blog-grid .card .content .meta { color: #666; font-size: 0.8rem; }
+        .blog-grid .card .content h3 { color: #fff; font-size: 1.1rem; margin: 8px 0; }
+        .blog-grid .card .content p { color: #888; font-size: 0.9rem; }
+        .blog-grid .card .content .read-more { color: #f9a825; font-weight: 600; font-size: 0.85rem; display: inline-block; margin-top: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<header>
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="XAUT">
+            <span>XAUT</span>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="tokenomics.html">Tokenomics</a>
+            <a href="reserves.html">Reserves</a>
+            <a href="pool.html">Pool</a>
+            <a href="staking.html">Staking</a>
+            <a href="buy.html">Buy</a>
+            <a href="blog.html" class="active">Blog</a>
+            <a href="team.html">Team</a>
+            <a href="contact.html">Contact</a>
+            <a href="gallery.html">Gallery</a>
+            <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
+        </nav>
+    </div>
+</header>
+
+<section style="padding: 120px 0 60px;">
+    <div class="container">
+        <h1 class="section-title"><span class="text-gold">Blog</span> & News</h1>
+        <p class="section-subtitle">Latest updates from the XAUT ecosystem</p>
+    </div>
+</section>
+
+<section style="padding: 20px 0 60px;">
+    <div class="container">
+        <div class="blog-grid">
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/XAUT_index.jpg" alt="XAUT Launch" />
+                <div class="content">
+                    <div class="meta">June 28, 2026 • Announcement</div>
+                    <h3>XAUT Launches on Solana</h3>
+                    <p>The gold standard of DeFi arrives on Solana with 10B supply and 0.25% fee.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/Xaut_blockchain.jpg" alt="Blockchain" />
+                <div class="content">
+                    <div class="meta">June 25, 2026 • Technology</div>
+                    <h3>Why Solana is Perfect for Digital Gold</h3>
+                    <p>Speed, security, and low fees make Solana the ideal blockchain for XAUT.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/XAUT_trade.jpg" alt="Trading" />
+                <div class="content">
+                    <div class="meta">June 20, 2026 • Trading</div>
+                    <h3>How to Trade XAUT on Meteora</h3>
+                    <p>Step-by-step guide to buying and selling XAUT on the Meteora DEX.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="socials">
+            <a href="https://x.com/xautgold" target="_blank">🐦 Twitter</a>
+            <a href="#" target="_blank">💬 Telegram</a>
+            <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
+            <a href="#" target="_blank">📈 CoinGecko</a>
+        </div>
+        <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
+    </div>
+</footer>
+
+</body>
+</html>
