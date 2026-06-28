@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery — XAUT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 40px; }
+        .gallery-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 16px; border: 1px solid rgba(255,255,255,0.04); transition: 0.3s; cursor: pointer; }
+        .gallery-grid img:hover { transform: scale(1.03); border-color: #f9a825; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 999; align-items: center; justify-content: center; padding: 40px; }
+        .modal.show { display: flex; }
+        .modal img { max-width: 90%; max-height: 90%; border-radius: 16px; }
+        .modal .close { position: absolute; top: 20px; right: 30px; font-size: 3rem; color: #fff; cursor: pointer; transition: 0.2s; }
+        .modal .close:hover { color: #f9a825; }
+    </style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<header>
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="XAUT">
+            <span>XAUT</span>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="tokenomics.html">Tokenomics</a>
+            <a href="reserves.html">Reserves</a>
+            <a href="pool.html">Pool</a>
+            <a href="staking.html">Staking</a>
+            <a href="buy.html">Buy</a>
+            <a href="blog.html">Blog</a>
+            <a href="team.html">Team</a>
+            <a href="contact.html">Contact</a>
+            <a href="gallery.html" class="active">Gallery</a>
+            <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
+        </nav>
+    </div>
+</header>
+
+<section style="padding: 120px 0 60px;">
+    <div class="container">
+        <h1 class="section-title"><span class="text-gold">Gallery</span></h1>
+        <p class="section-subtitle">Explore the visual journey of XAUT — the gold standard of DeFi</p>
+    </div>
+</section>
+
+<section style="padding: 20px 0 60px;">
+    <div class="container">
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Images will be loaded by JS -->
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal" id="modal" onclick="closeModal(event)">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImg" src="" alt="Full view" />
+</div>
+
+<script>
+    const images = [
+        'XAUT_gold_bars.jpg',
+        'XAUT_gold_silver_bars.jpg',
+        '5eed0822-1b7b-454a-9082-6778ecf8483c_1536x1024.png',
+        'Generated-Image-September-29-2025-11_30AM.jpg',
+        'Xaut_blockchain.jpg',
+        'XAUT_trade.jpg',
+        'XAUT_trade-1.jpg',
+        'Xaut_feature-divisibility.webp',
+        'gold-xaut-coin-cryptocurrency.jpg',
+        'Xaut_gold_deri.jpg',
+        'Xaut_undefined.jpg',
+        'tether_xaut_cryptocurrency-coin-gold.jpg',
+    ];
+
+    const grid = document.getElementById('galleryGrid');
+    images.forEach(img => {
+        const el = document.createElement('img');
+        el.src = `https://raw.githubusercontent.com/goldtether/xaut/main/${img}`;
+        el.alt = 'XAUT Gallery';
+        el.onclick = () => openModal(el.src);
+        grid.appendChild(el);
+    });
+
+    function openModal(src) {
+        document.getElementById('modal').classList.add('show');
+        document.getElementById('modalImg').src = src;
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(e) {
+        if (e && e.target !== e.currentTarget) return;
+        document.getElementById('modal').classList.remove('show');
+        document.body.style.overflow = 'auto';
+    }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+<footer>
+    <div class="container">
+        <div class="socials">
+            <a href="https://x.com/xautgold" target="_blank">🐦 Twitter</a>
+            <a href="#" target="_blank">💬 Telegram</a>
+            <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
+            <a href="#" target="_blank">📈 CoinGecko</a>
+        </div>
+        <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
+    </div>
+</footer>
+
+</body>
+</html>
