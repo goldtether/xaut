@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buy — XAUT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .buy-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+        .buy-steps .card { text-align: center; padding: 32px 24px; }
+        .buy-steps .card .step { font-size: 3rem; font-weight: 900; color: rgba(249,168,37,0.15); margin-bottom: 8px; }
+        .buy-steps .card h3 { color: #fff; font-size: 1.1rem; }
+        .buy-steps .card p { color: #888; font-size: 0.9rem; margin-top: 4px; }
+        @media (max-width: 700px) { .buy-steps { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<header>
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="XAUT">
+            <span>XAUT</span>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="tokenomics.html">Tokenomics</a>
+            <a href="reserves.html">Reserves</a>
+            <a href="pool.html">Pool</a>
+            <a href="staking.html">Staking</a>
+            <a href="buy.html" class="active">Buy</a>
+            <a href="blog.html">Blog</a>
+            <a href="team.html">Team</a>
+            <a href="contact.html">Contact</a>
+            <a href="gallery.html">Gallery</a>
+            <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
+        </nav>
+    </div>
+</header>
+
+<section style="padding: 120px 0 60px;">
+    <div class="container">
+        <h1 class="section-title">How to <span class="text-gold">Buy</span> XAUT</h1>
+        <p class="section-subtitle">Start your journey with digital gold in 3 easy steps</p>
+    </div>
+</section>
+
+<section style="padding: 20px 0 60px;">
+    <div class="container">
+        <div class="buy-steps">
+            <div class="card">
+                <div class="step">1</div>
+                <h3>🦊 Get a Wallet</h3>
+                <p>Download Phantom or Solflare wallet and fund it with SOL for fees.</p>
+            </div>
+            <div class="card">
+                <div class="step">2</div>
+                <h3>💰 Get USDC or SOL</h3>
+                <p>Buy USDC or SOL on any exchange (Binance, Coinbase) and send to your wallet.</p>
+            </div>
+            <div class="card">
+                <div class="step">3</div>
+                <h3>🔄 Trade on Meteora</h3>
+                <p>Go to Meteora, connect wallet, and swap for XAUT at the best price.</p>
+            </div>
+            <div class="card" style="border-color: #f9a825; border-width: 2px;">
+                <div class="step" style="color: rgba(249,168,37,0.3);">🚀</div>
+                <h3 style="color: #f9a825;">Ready to Buy?</h3>
+                <p style="color: #f9a825;">Click the button below to trade on GeckoTerminal</p>
+                <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank" class="btn-gold" style="display: inline-block; margin-top: 12px;">Buy XAUT Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="socials">
+            <a href="https://x.com/xautgold" target="_blank">🐦 Twitter</a>
+            <a href="#" target="_blank">💬 Telegram</a>
+            <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
+            <a href="#" target="_blank">📈 CoinGecko</a>
+        </div>
+        <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
+    </div>
+</footer>
+
+</body>
+</html>
