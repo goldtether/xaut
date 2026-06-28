@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — XAUT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+        .contact-grid .card { padding: 24px; }
+        .contact-grid .card h3 { color: #fff; font-size: 1.2rem; margin-bottom: 16px; }
+        .contact-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; color: #ccc; }
+        .contact-item .icon { font-size: 1.2rem; }
+        .contact-grid .card input, .contact-grid .card textarea { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 12px 16px; border-radius: 12px; color: #fff; font-size: 1rem; margin-bottom: 12px; }
+        .contact-grid .card textarea { min-height: 120px; resize: vertical; }
+        .contact-grid .card input:focus, .contact-grid .card textarea:focus { outline: none; border-color: #f9a825; }
+        @media (max-width: 700px) { .contact-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<header>
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="XAUT">
+            <span>XAUT</span>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="tokenomics.html">Tokenomics</a>
+            <a href="reserves.html">Reserves</a>
+            <a href="pool.html">Pool</a>
+            <a href="staking.html">Staking</a>
+            <a href="buy.html">Buy</a>
+            <a href="blog.html">Blog</a>
+            <a href="team.html">Team</a>
+            <a href="contact.html" class="active">Contact</a>
+            <a href="gallery.html">Gallery</a>
+            <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
+        </nav>
+    </div>
+</header>
+
+<section style="padding: 120px 0 60px;">
+    <div class="container">
+        <h1 class="section-title"><span class="text-gold">Contact</span> Us</h1>
+        <p class="section-subtitle">Get in touch with the XAUT team</p>
+    </div>
+</section>
+
+<section style="padding: 20px 0 60px;">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="card">
+                <h3>Get in Touch</h3>
+                <div class="contact-item"><span class="icon">📧</span> hello@xaut.io</div>
+                <div class="contact-item"><span class="icon">🐦</span> @xautgold</div>
+                <div class="contact-item"><span class="icon">💬</span> t.me/xautcommunity</div>
+                <div class="contact-item"><span class="icon">📊</span> GeckoTerminal Pool</div>
+                <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 20px;">
+                    <p style="color: #888; font-size: 0.85rem;">Contract Address:</p>
+                    <code style="color: #aaa; font-size: 0.75rem; word-break: break-all;">54cupsRcuquPgWqJRuS95kVub44qyMh5ZxhxVTnoQuBM</code>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Send a Message</h3>
+                <form onsubmit="alert('Message sent! We\'ll get back to you soon.'); return false;">
+                    <input type="text" placeholder="Your Name" required />
+                    <input type="email" placeholder="Your Email" required />
+                    <input type="text" placeholder="Subject" />
+                    <textarea placeholder="Your Message..." required></textarea>
+                    <button type="submit" class="btn-gold" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="socials">
+            <a href="https://x.com/xautgold" target="_blank">🐦 Twitter</a>
+            <a href="#" target="_blank">💬 Telegram</a>
+            <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
+            <a href="#" target="_blank">📈 CoinGecko</a>
+        </div>
+        <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
+    </div>
+</footer>
+
+</body>
+</html>
