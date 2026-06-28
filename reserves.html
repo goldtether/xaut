@@ -7,15 +7,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <style>
-        .reserves-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 40px; }
-        .reserves-grid .card { text-align: center; }
+        .reserves-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .reserves-grid .card { text-align: center; padding: 28px 20px; }
         .reserves-grid .card .number { font-size: 2rem; font-weight: 800; color: #f9a825; }
-        .reserves-grid .card .label { color: #888; font-size: 0.85rem; }
-        .audit-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
-        .audit-item { display: flex; justify-content: space-between; padding: 16px 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; }
-        .audit-item .status { color: #4caf50; }
+        .reserves-grid .card .label { color: #888; font-size: 0.85rem; margin-top: 4px; }
+        .reserves-grid .card .icon { font-size: 2.4rem; margin-bottom: 8px; }
+        .reserves-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 40px;
+        }
+        .reserves-features img { width: 100%; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        .reserves-features h2 { font-size: 2rem; color: #fff; }
+        .reserves-features p { color: #888; margin-top: 12px; line-height: 1.8; }
+        .reserves-features .list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+        .reserves-features .list .item { display: flex; align-items: center; gap: 12px; color: #ccc; }
+        .reserves-features .list .item .icon { color: #f9a825; font-size: 1.2rem; }
+        .audit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 40px;
+        }
+        .audit-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+        .audit-item:hover { border-color: rgba(249,168,37,0.2); }
+        .audit-item .status { font-weight: 600; }
+        .audit-item .status.completed { color: #4caf50; }
         .audit-item .status.pending { color: #f9a825; }
-        @media (max-width: 700px) { .audit-list { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            .reserves-features { grid-template-columns: 1fr; }
+            .audit-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -23,6 +61,7 @@
 <div class="glow glow-1"></div>
 <div class="glow glow-2"></div>
 
+<!-- ===== HEADER ===== -->
 <header>
     <div class="container header-inner">
         <a href="index.html" class="logo">
@@ -41,47 +80,75 @@
             <a href="team.html">Team</a>
             <a href="contact.html">Contact</a>
             <a href="gallery.html">Gallery</a>
-            <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
+            <button class="btn-connect" onclick="alert('🔗 Connect wallet — coming soon!')">Connect Wallet</button>
         </nav>
     </div>
 </header>
 
-<section style="padding: 120px 0 60px;">
+<!-- ===== HERO ===== -->
+<section style="padding: 120px 0 40px;">
     <div class="container">
         <h1 class="section-title"><span class="text-gold">Gold Reserves</span></h1>
         <p class="section-subtitle">Fully transparent and regularly audited gold reserves</p>
     </div>
 </section>
 
-<section style="padding: 20px 0 60px;">
+<!-- ===== RESERVES STATS ===== -->
+<section style="padding: 20px 0 40px;">
     <div class="container">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
-            <img src="https://raw.githubusercontent.com/goldtether/xaut/main/XAUT_gold_silver_bars.jpg" alt="Gold and Silver Bars" style="border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); width: 100%;" />
+        <div class="reserves-grid">
+            <div class="card"><div class="icon">🏦</div><div class="number">10M g</div><div class="label">Total Gold</div></div>
+            <div class="card"><div class="icon">💰</div><div class="number">$1B+</div><div class="label">Gold Value</div></div>
+            <div class="card"><div class="icon">✅</div><div class="number">100%</div><div class="label">Audited</div></div>
+            <div class="card"><div class="icon">🔒</div><div class="number">Secure</div><div class="label">Vault Storage</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PHYSICAL BACKING ===== -->
+<section style="padding: 20px 0 60px; border-top: 1px solid rgba(255,255,255,0.04);">
+    <div class="container">
+        <div class="reserves-features">
+            <img src="https://raw.githubusercontent.com/goldtether/xaut/main/XAUT_gold_silver_bars.jpg" alt="Gold and Silver Bars" />
             <div>
-                <h2 style="font-size: 2rem; color: #fff;">Physical Gold Backing</h2>
-                <p style="color: #888; margin-top: 16px;">Each XAUT token is backed by one gram of physical gold, stored in secure vaults. Our reserves are fully transparent and regularly audited by independent third parties.</p>
-                <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
-                    <div style="display: flex; align-items: center; gap: 12px;"><span style="color: #f9a825;">🔒</span> <span style="color: #ccc;">Secure vault storage</span></div>
-                    <div style="display: flex; align-items: center; gap: 12px;"><span style="color: #f9a825;">🛡️</span> <span style="color: #ccc;">100% gold-backed</span></div>
-                    <div style="display: flex; align-items: center; gap: 12px;"><span style="color: #f9a825;">📊</span> <span style="color: #ccc;">Regular audits</span></div>
+                <h2>Physical Gold Backing</h2>
+                <p>Each XAUT token is backed by one gram of physical gold, stored in secure vaults. Our reserves are fully transparent and regularly audited by independent third parties.</p>
+                <div class="list">
+                    <div class="item"><span class="icon">🔒</span> Secure vault storage</div>
+                    <div class="item"><span class="icon">🛡️</span> 100% gold-backed</div>
+                    <div class="item"><span class="icon">📊</span> Regular audits</div>
+                    <div class="item"><span class="icon">🔍</span> Full transparency</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- ===== AUDITS ===== -->
 <section style="padding: 40px 0 60px; border-top: 1px solid rgba(255,255,255,0.04);">
     <div class="container">
         <h2 class="section-title"><span class="text-gold">Audits</span> & Transparency</h2>
-        <div class="audit-list">
-            <div class="audit-item"><span style="color: #fff;">Solana Security Audit</span><span class="status">✅ Completed</span></div>
-            <div class="audit-item"><span style="color: #fff;">Gold Reserve Audit</span><span class="status">✅ Completed</span></div>
+        <div class="audit-grid">
+            <div class="audit-item"><span style="color: #fff;">Solana Security Audit</span><span class="status completed">✅ Completed</span></div>
+            <div class="audit-item"><span style="color: #fff;">Gold Reserve Audit</span><span class="status completed">✅ Completed</span></div>
             <div class="audit-item"><span style="color: #fff;">Smart Contract Audit</span><span class="status pending">⏳ In Progress</span></div>
-            <div class="audit-item"><span style="color: #fff;">Tokenomics Review</span><span class="status">✅ Completed</span></div>
+            <div class="audit-item"><span style="color: #fff;">Tokenomics Review</span><span class="status completed">✅ Completed</span></div>
+            <div class="audit-item"><span style="color: #fff;">Vault Inspection</span><span class="status completed">✅ Completed</span></div>
+            <div class="audit-item"><span style="color: #fff;">Compliance Audit</span><span class="status pending">⏳ In Progress</span></div>
         </div>
     </div>
 </section>
 
+<!-- ===== CONTRACT ===== -->
+<div class="container contract-box">
+    <div class="label">Contract Address</div>
+    <code>54cupsRcuquPgWqJRuS95kVub44qyMh5ZxhxVTnoQuBM</code>
+    <div class="pool-link">
+        <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">🔗 View Pool on GeckoTerminal</a>
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
 <footer>
     <div class="container">
         <div class="socials">
@@ -89,6 +156,8 @@
             <a href="#" target="_blank">💬 Telegram</a>
             <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
             <a href="#" target="_blank">📈 CoinGecko</a>
+            <a href="#" target="_blank">📝 Medium</a>
+            <a href="#" target="_blank">🔗 GitHub</a>
         </div>
         <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
     </div>
