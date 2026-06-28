@@ -7,14 +7,56 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <style>
-        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px; }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
         .blog-grid .card { overflow: hidden; padding: 0; }
-        .blog-grid .card img { width: 100%; height: 200px; object-fit: cover; }
-        .blog-grid .card .content { padding: 20px; }
-        .blog-grid .card .content .meta { color: #666; font-size: 0.8rem; }
-        .blog-grid .card .content h3 { color: #fff; font-size: 1.1rem; margin: 8px 0; }
-        .blog-grid .card .content p { color: #888; font-size: 0.9rem; }
-        .blog-grid .card .content .read-more { color: #f9a825; font-weight: 600; font-size: 0.85rem; display: inline-block; margin-top: 8px; }
+        .blog-grid .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .blog-grid .card .content { padding: 24px 20px 20px; }
+        .blog-grid .card .meta {
+            color: #666;
+            font-size: 0.8rem;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .blog-grid .card .meta .category {
+            color: #f9a825;
+            font-weight: 600;
+        }
+        .blog-grid .card h3 {
+            color: #fff;
+            font-size: 1.15rem;
+            margin: 8px 0 6px;
+            transition: 0.3s;
+        }
+        .blog-grid .card:hover h3 { color: #f9a825; }
+        .blog-grid .card p { color: #888; font-size: 0.9rem; }
+        .blog-grid .card .read-more {
+            color: #f9a825;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .blog-grid .card .read-more:hover { text-decoration: underline; }
+        .blog-sidebar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 40px;
+        }
+        .blog-sidebar .card { text-align: center; padding: 20px 16px; }
+        .blog-sidebar .card .number { font-size: 1.6rem; font-weight: 800; color: #f9a825; }
+        .blog-sidebar .card .label { color: #888; font-size: 0.85rem; }
     </style>
 </head>
 <body>
@@ -22,6 +64,7 @@
 <div class="glow glow-1"></div>
 <div class="glow glow-2"></div>
 
+<!-- ===== HEADER ===== -->
 <header>
     <div class="container header-inner">
         <a href="index.html" class="logo">
@@ -40,45 +83,74 @@
             <a href="team.html">Team</a>
             <a href="contact.html">Contact</a>
             <a href="gallery.html">Gallery</a>
-            <button class="btn-connect" onclick="alert('Connect wallet coming soon!')">Connect Wallet</button>
+            <button class="btn-connect" onclick="alert('🔗 Connect wallet — coming soon!')">Connect Wallet</button>
         </nav>
     </div>
 </header>
 
-<section style="padding: 120px 0 60px;">
+<!-- ===== HERO ===== -->
+<section style="padding: 120px 0 40px;">
     <div class="container">
         <h1 class="section-title"><span class="text-gold">Blog</span> & News</h1>
         <p class="section-subtitle">Latest updates from the XAUT ecosystem</p>
     </div>
 </section>
 
-<section style="padding: 20px 0 60px;">
+<!-- ===== BLOG POSTS ===== -->
+<section style="padding: 20px 0 40px;">
     <div class="container">
         <div class="blog-grid">
             <div class="card">
                 <img src="https://raw.githubusercontent.com/goldtether/xaut/main/XAUT_index.jpg" alt="XAUT Launch" />
                 <div class="content">
-                    <div class="meta">June 28, 2026 • Announcement</div>
+                    <div class="meta"><span class="category">🚀 Announcement</span> June 28, 2026</div>
                     <h3>XAUT Launches on Solana</h3>
-                    <p>The gold standard of DeFi arrives on Solana with 10B supply and 0.25% fee.</p>
+                    <p>The gold standard of DeFi arrives on Solana with 10B supply and 0.25% fee. Learn how XAUT is changing digital gold.</p>
                     <a href="#" class="read-more">Read More →</a>
                 </div>
             </div>
             <div class="card">
                 <img src="https://raw.githubusercontent.com/goldtether/xaut/main/Xaut_blockchain.jpg" alt="Blockchain" />
                 <div class="content">
-                    <div class="meta">June 25, 2026 • Technology</div>
+                    <div class="meta"><span class="category">⚡ Technology</span> June 25, 2026</div>
                     <h3>Why Solana is Perfect for Digital Gold</h3>
-                    <p>Speed, security, and low fees make Solana the ideal blockchain for XAUT.</p>
+                    <p>Speed, security, and low fees make Solana the ideal blockchain for XAUT. Here's why we chose Solana.</p>
                     <a href="#" class="read-more">Read More →</a>
                 </div>
             </div>
             <div class="card">
                 <img src="https://raw.githubusercontent.com/goldtether/xaut/main/XAUT_trade.jpg" alt="Trading" />
                 <div class="content">
-                    <div class="meta">June 20, 2026 • Trading</div>
+                    <div class="meta"><span class="category">📊 Trading</span> June 20, 2026</div>
                     <h3>How to Trade XAUT on Meteora</h3>
-                    <p>Step-by-step guide to buying and selling XAUT on the Meteora DEX.</p>
+                    <p>Step-by-step guide to buying and selling XAUT on the Meteora DEX. Tips for getting the best price.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/Xaut_feature-divisibility.webp" alt="Divisibility" />
+                <div class="content">
+                    <div class="meta"><span class="category">🔬 Features</span> June 15, 2026</div>
+                    <h3>Token 2022: The Future of SPL Tokens</h3>
+                    <p>XAUT uses the new Token 2022 standard. Learn about the benefits and improvements over the original SPL token.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/Xaut_gold_deri.jpg" alt="DeFi" />
+                <div class="content">
+                    <div class="meta"><span class="category">🏦 DeFi</span> June 10, 2026</div>
+                    <h3>Gold as Collateral in DeFi</h3>
+                    <p>How XAUT enables using physical gold as collateral for borrowing and lending in the DeFi ecosystem.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/goldtether/xaut/main/tether_xaut_cryptocurrency-coin-gold.jpg" alt="XAUT Coin" />
+                <div class="content">
+                    <div class="meta"><span class="category">💎 Community</span> June 5, 2026</div>
+                    <h3>Join the XAUT Community</h3>
+                    <p>Connect with other XAUT holders, share insights, and be part of the golden revolution in DeFi.</p>
                     <a href="#" class="read-more">Read More →</a>
                 </div>
             </div>
@@ -86,6 +158,28 @@
     </div>
 </section>
 
+<!-- ===== BLOG STATS ===== -->
+<section style="padding: 20px 0 40px; border-top: 1px solid rgba(255,255,255,0.04);">
+    <div class="container">
+        <div class="blog-sidebar">
+            <div class="card"><div class="number">12</div><div class="label">Total Articles</div></div>
+            <div class="card"><div class="number">2.3K</div><div class="label">Total Reads</div></div>
+            <div class="card"><div class="number">5</div><div class="label">Categories</div></div>
+            <div class="card"><div class="number">✨</div><div class="label">New Posts Weekly</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTRACT ===== -->
+<div class="container contract-box">
+    <div class="label">Contract Address</div>
+    <code>54cupsRcuquPgWqJRuS95kVub44qyMh5ZxhxVTnoQuBM</code>
+    <div class="pool-link">
+        <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">🔗 View Pool on GeckoTerminal</a>
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
 <footer>
     <div class="container">
         <div class="socials">
@@ -93,6 +187,8 @@
             <a href="#" target="_blank">💬 Telegram</a>
             <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank">📊 GeckoTerminal</a>
             <a href="#" target="_blank">📈 CoinGecko</a>
+            <a href="#" target="_blank">📝 Medium</a>
+            <a href="#" target="_blank">🔗 GitHub</a>
         </div>
         <p style="margin-top:20px; color:#444;">© 2026 XAUT Protocol. Built on Solana.</p>
     </div>
