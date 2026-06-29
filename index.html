@@ -7,66 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <style>
-        /* ===== LANGUAGE SWITCHER ===== */
-        .lang-switcher {
-            position: relative;
-            display: inline-block;
-            margin-left: 8px;
-        }
-        .lang-btn {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
-            color: #eef2f8;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-size: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-family: inherit;
-        }
-        .lang-btn:hover {
-            background: rgba(249,168,37,0.1);
-            border-color: #f9a825;
-        }
-        .lang-dropdown {
-            position: absolute;
-            top: 120%;
-            right: 0;
-            background: #0b0e14;
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 16px;
-            padding: 6px 0;
-            min-width: 160px;
-            display: none;
-            z-index: 999;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-        }
-        .lang-dropdown.show { display: block; }
-        .lang-dropdown button {
-            background: none;
-            border: none;
-            color: #8892b0;
-            padding: 6px 18px;
-            width: 100%;
-            text-align: left;
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.1s;
-            font-family: inherit;
-        }
-        .lang-dropdown button:hover {
-            background: rgba(249,168,37,0.05);
-            color: #f9a825;
-        }
-        .lang-dropdown button.active {
-            color: #f9a825;
-            font-weight: 700;
-        }
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -110,7 +50,6 @@
         }
         @media (max-width: 700px) {
             .video-grid { grid-template-columns: 1fr; }
-            .lang-switcher { margin-left: 0; }
         }
     </style>
 </head>
@@ -324,7 +263,6 @@
     </div>
 </footer>
 
-<!-- ===== СКРИПТЫ ===== -->
 <script>
     // ================================================================
     // 1. БЕГУЩИЕ СЧЁТЧИКИ
@@ -683,6 +621,27 @@
     // 3. 50 000+ ФУНКЦИЙ — ГЕНЕРАТОР
     // ================================================================
 
+    const COMPANIES = [
+        'https://binance.com', 'https://coinbase.com', 'https://kraken.com', 'https://kucoin.com',
+        'https://bybit.com', 'https://okx.com', 'https://gate.io', 'https://mexc.com',
+        'https://bitget.com', 'https://htx.com', 'https://uniswap.org', 'https://pancakeswap.finance',
+        'https://raydium.io', 'https://orca.so', 'https://meteora.ag', 'https://jup.ag',
+        'https://1inch.io', 'https://sushi.com', 'https://coingecko.com', 'https://coinmarketcap.com',
+        'https://tradingview.com', 'https://defillama.com', 'https://dune.com', 'https://nansen.ai',
+        'https://messari.io', 'https://phantom.app', 'https://solflare.com', 'https://metamask.io',
+        'https://trustwallet.com', 'https://ledger.com', 'https://trezor.io', 'https://solana.com',
+        'https://ethereum.org', 'https://bitcoin.org', 'https://polygon.technology', 'https://arbitrum.io',
+        'https://optimism.io', 'https://avalanche.com', 'https://tether.to', 'https://circle.com',
+        'https://chainlink.io', 'https://thegraph.com', 'https://helium.com', 'https://hivemapper.com',
+        'https://cointelegraph.com', 'https://coindesk.com', 'https://theblock.co', 'https://decrypt.co',
+        'https://bankless.com', 'https://solscan.io', 'https://solana.com', 'https://meteora.ag',
+        'https://jup.ag', 'https://app.phantom.app', 'https://solflare.com', 'https://dexscreener.com',
+        'https://birdeye.so', 'https://tradingview.com', 'https://coingecko.com', 'https://coinmarketcap.com',
+        'https://messari.io', 'https://nansen.ai', 'https://dune.com', 'https://defillama.com',
+        'https://cer.live', 'https://rugcheck.xyz', 'https://rugdoc.io', 'https://tokensniffer.com',
+        'https://honeypot.is', 'https://gopluslabs.io', 'https://solar.flashbots.net', 'https://solscan.io'
+    ];
+
     const CATEGORIES = [
         { id: 'converter', name: '🔄 Converters', count: 10000 },
         { id: 'predictor', name: '📈 Price Predictions', count: 5000 },
@@ -698,9 +657,12 @@
 
     function generateFunctions() {
         const allFunctions = [];
+        let companyIndex = 0;
         CATEGORIES.forEach(cat => {
             for (let i = 0; i < cat.count; i++) {
                 let name, desc, result;
+                const link = COMPANIES[companyIndex % COMPANIES.length];
+                companyIndex++;
                 switch (cat.id) {
                     case 'converter':
                         const currencies = ['USD', 'EUR', 'GBP', 'JPY', 'CNY', 'BTC', 'ETH', 'SOL'];
@@ -794,7 +756,15 @@
                         desc = `Unique function`;
                         result = `✅ Working`;
                 }
-                allFunctions.push({ id: `${cat.id}-${i}`, category: cat.name, name, desc, result, status: 'active' });
+                allFunctions.push({
+                    id: `${cat.id}-${i}`,
+                    category: cat.name,
+                    name: name,
+                    desc: desc,
+                    result: result,
+                    link: link,
+                    status: 'active'
+                });
             }
         });
         return allFunctions;
@@ -811,7 +781,13 @@
             const card = document.createElement('div');
             card.className = 'function-card';
             card.innerHTML = `
-                <div class="name">${fn.name} <span class="badge">${fn.category}</span></div>
+                <div class="name">
+                    <a href="${fn.link}" target="_blank" style="color:#fff;text-decoration:none;">
+                        ${fn.name}
+                        <span class="link-icon">🔗</span>
+                    </a>
+                    <span class="badge">${fn.category}</span>
+                </div>
                 <div class="desc">${fn.desc}</div>
                 <div class="desc" style="color:#f9a825;font-size:0.8rem;margin-top:4px;">→ ${fn.result}</div>
                 <span class="status">● Working</span>
