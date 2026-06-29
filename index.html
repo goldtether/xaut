@@ -7,6 +7,206 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <style>
+        /* ===== ПОДЛОЖКА С ПАРЯЩИМИ ФИГУРАМИ ===== */
+        .bg-shapes {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .bg-shapes .shape {
+            position: absolute;
+            opacity: 0.06;
+            border: 1px solid rgba(249,168,37,0.15);
+            border-radius: 50%;
+            animation: floatShape 20s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+        .bg-shapes .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: -5%;
+            animation-duration: 22s;
+            border-color: rgba(249,168,37,0.1);
+        }
+        .bg-shapes .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            right: -3%;
+            animation-duration: 18s;
+            animation-delay: -3s;
+            border-color: rgba(249,168,37,0.08);
+        }
+        .bg-shapes .shape:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            bottom: 10%;
+            left: 20%;
+            animation-duration: 25s;
+            animation-delay: -6s;
+            border-color: rgba(255,215,0,0.05);
+        }
+        .bg-shapes .shape:nth-child(4) {
+            width: 150px;
+            height: 150px;
+            top: 20%;
+            left: 40%;
+            animation-duration: 15s;
+            animation-delay: -2s;
+            border-color: rgba(249,168,37,0.12);
+        }
+        .bg-shapes .shape:nth-child(5) {
+            width: 250px;
+            height: 250px;
+            bottom: 30%;
+            right: 10%;
+            animation-duration: 20s;
+            animation-delay: -8s;
+            border-color: rgba(255,215,0,0.06);
+        }
+        /* КОЛЬЦА */
+        .bg-shapes .ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(249,168,37,0.06);
+            animation: spinRing 30s linear infinite;
+            will-change: transform;
+        }
+        .bg-shapes .ring:nth-child(6) {
+            width: 500px;
+            height: 500px;
+            top: 5%;
+            left: 30%;
+            animation-duration: 35s;
+            border-color: rgba(249,168,37,0.04);
+        }
+        .bg-shapes .ring:nth-child(7) {
+            width: 350px;
+            height: 350px;
+            bottom: 10%;
+            right: 15%;
+            animation-duration: 28s;
+            animation-direction: reverse;
+            border-color: rgba(255,215,0,0.03);
+        }
+        /* ЛИНИИ */
+        .bg-shapes .line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(249,168,37,0.06), transparent);
+            animation: slideLine 18s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+        .bg-shapes .line:nth-child(8) {
+            width: 60%;
+            top: 30%;
+            left: -10%;
+            animation-duration: 20s;
+        }
+        .bg-shapes .line:nth-child(9) {
+            width: 40%;
+            bottom: 40%;
+            right: -5%;
+            animation-duration: 16s;
+            animation-delay: -4s;
+        }
+        /* ТРЕУГОЛЬНИКИ */
+        .bg-shapes .triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 100px solid rgba(249,168,37,0.03);
+            opacity: 0.4;
+            animation: floatShape 25s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+        .bg-shapes .triangle:nth-child(10) {
+            top: 60%;
+            left: 5%;
+            animation-duration: 19s;
+            animation-delay: -5s;
+            transform: scale(0.7);
+        }
+        .bg-shapes .triangle:nth-child(11) {
+            top: 15%;
+            right: 15%;
+            animation-duration: 22s;
+            animation-delay: -10s;
+            transform: scale(0.5) rotate(180deg);
+        }
+        /* ДОПОЛНИТЕЛЬНЫЕ ФИГУРЫ */
+        .bg-shapes .hex {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(249,168,37,0.02);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: floatShape 28s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+        .bg-shapes .hex:nth-child(12) {
+            top: 70%;
+            left: 60%;
+            animation-duration: 24s;
+            animation-delay: -7s;
+            width: 120px;
+            height: 120px;
+        }
+        .bg-shapes .hex:nth-child(13) {
+            top: 10%;
+            left: 70%;
+            animation-duration: 20s;
+            animation-delay: -3s;
+            width: 60px;
+            height: 60px;
+        }
+        .bg-shapes .dots {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(249,168,37,0.04) 2px, transparent 2px);
+            background-size: 30px 30px;
+            animation: floatShape 30s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+        .bg-shapes .dots:nth-child(14) {
+            top: 40%;
+            left: 50%;
+            animation-duration: 26s;
+            animation-delay: -9s;
+        }
+        .bg-shapes .dots:nth-child(15) {
+            bottom: 20%;
+            left: 10%;
+            animation-duration: 22s;
+            animation-delay: -4s;
+            width: 150px;
+            height: 150px;
+        }
+
+        /* АНИМАЦИИ */
+        @keyframes floatShape {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            33% { transform: translate(30px, -40px) scale(1.02) rotate(5deg); }
+            66% { transform: translate(-20px, 30px) scale(0.98) rotate(-3deg); }
+            100% { transform: translate(15px, -20px) scale(1.01) rotate(2deg); }
+        }
+        @keyframes spinRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes slideLine {
+            0% { transform: translateX(0); opacity: 0.2; }
+            50% { opacity: 0.6; }
+            100% { transform: translateX(100px); opacity: 0.2; }
+        }
+
+        /* ===== ОСНОВНЫЕ СТИЛИ ===== */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -47,6 +247,8 @@
             border-radius: 24px;
             padding: 48px 32px;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
         .function-card a {
             display: block;
@@ -68,12 +270,35 @@
             opacity: 0.5;
             transition: 0.3s;
         }
+        .container, .hero, .section-padding, .functions-section {
+            position: relative;
+            z-index: 1;
+        }
         @media (max-width: 700px) {
             .video-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+
+<!-- ===== ПАРЯЩАЯ ПОДЛОЖКА ===== -->
+<div class="bg-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="triangle"></div>
+    <div class="triangle"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="dots"></div>
+    <div class="dots"></div>
+</div>
 
 <div class="glow glow-1"></div>
 <div class="glow glow-2"></div>
@@ -284,6 +509,7 @@
     </div>
 </footer>
 
+<!-- ===== СКРИПТЫ ===== -->
 <script>
     // ================================================================
     // 1. БЕГУЩИЙ СЧЁТЧИК (9,999,999.99999999)
