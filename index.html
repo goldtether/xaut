@@ -119,12 +119,12 @@
 <!-- ===== COUNTERS ===== -->
 <div class="container stats">
     <div class="stat-item">
-        <div class="number"><span id="clientCount">0</span></div>
+        <div class="number"><span id="clientCount">0.00000000</span></div>
         <div class="label" data-i18n="stat-clients">Total Clients</div>
         <span class="live">● LIVE</span>
     </div>
     <div class="stat-item">
-        <div class="number"><span id="tradeCount">0</span></div>
+        <div class="number"><span id="tradeCount">0.00000000</span></div>
         <div class="label" data-i18n="stat-trades">Total Trades</div>
         <span class="live">● LIVE</span>
     </div>
@@ -265,11 +265,11 @@
 
 <script>
     // ================================================================
-    // 1. БЕГУЩИЕ СЧЁТЧИКИ
+    // 1. БЕГУЩИЙ СЧЁТЧИК (9,999,999.99999999)
     // ================================================================
     (function() {
-        const TARGET_CLIENTS = 15000.99999999;
-        const TARGET_TRADES = 10234.56789;
+        const TARGET_CLIENTS = 9999999.99999999;
+        const TARGET_TRADES = 9999999.99999999;
         let currentClients = 0;
         let currentTrades = 0;
 
@@ -279,31 +279,34 @@
 
         function updateCounters() {
             if (currentClients < TARGET_CLIENTS) {
-                let step = (Math.random() * 0.5) + 0.05;
+                let step = (Math.random() * 0.08) + 0.01; // медленный шаг
                 currentClients = Math.min(currentClients + step, TARGET_CLIENTS);
                 document.getElementById('clientCount').textContent = formatNumber(currentClients);
             }
             if (currentTrades < TARGET_TRADES) {
-                let step = (Math.random() * 1.2) + 0.1;
+                let step = (Math.random() * 0.12) + 0.01; // медленный шаг
                 currentTrades = Math.min(currentTrades + step, TARGET_TRADES);
                 document.getElementById('tradeCount').textContent = formatNumber(currentTrades);
             }
+            // Если достигли цели — сбрасываем до 85% и начинаем заново
             if (currentClients >= TARGET_CLIENTS && currentTrades >= TARGET_TRADES) {
                 setTimeout(() => {
                     currentClients = TARGET_CLIENTS * 0.85;
                     currentTrades = TARGET_TRADES * 0.80;
-                }, 3000);
+                }, 4000);
             }
         }
 
-        setInterval(updateCounters, 10);
+        // Обновление каждые 200 мс (медленно)
+        setInterval(updateCounters, 200);
 
+        // Стартовые значения (25% от цели)
         setTimeout(() => {
             currentClients = TARGET_CLIENTS * 0.25;
             currentTrades = TARGET_TRADES * 0.15;
             document.getElementById('clientCount').textContent = formatNumber(currentClients);
             document.getElementById('tradeCount').textContent = formatNumber(currentTrades);
-        }, 50);
+        }, 100);
     })();
 
     // ================================================================
