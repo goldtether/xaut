@@ -7,13 +7,166 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <style>
+        /* ===== ПОДЛОЖКА С ПАРЯЩИМИ ФИГУРАМИ ===== */
+        .bg-shapes {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .bg-shapes .shape {
+            position: absolute;
+            opacity: 0.06;
+            border: 1px solid rgba(249,168,37,0.15);
+            border-radius: 50%;
+            animation: floatShape 20s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+        .bg-shapes .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: -5%;
+            animation-duration: 22s;
+            border-color: rgba(249,168,37,0.1);
+        }
+        .bg-shapes .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            right: -3%;
+            animation-duration: 18s;
+            animation-delay: -3s;
+            border-color: rgba(249,168,37,0.08);
+        }
+        .bg-shapes .shape:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            bottom: 10%;
+            left: 20%;
+            animation-duration: 25s;
+            animation-delay: -6s;
+            border-color: rgba(255,215,0,0.05);
+        }
+        .bg-shapes .shape:nth-child(4) {
+            width: 150px;
+            height: 150px;
+            top: 20%;
+            left: 40%;
+            animation-duration: 15s;
+            animation-delay: -2s;
+            border-color: rgba(249,168,37,0.12);
+        }
+        .bg-shapes .shape:nth-child(5) {
+            width: 250px;
+            height: 250px;
+            bottom: 30%;
+            right: 10%;
+            animation-duration: 20s;
+            animation-delay: -8s;
+            border-color: rgba(255,215,0,0.06);
+        }
+        /* ===== КОЛЬЦА ===== */
+        .bg-shapes .ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(249,168,37,0.06);
+            animation: spinRing 30s linear infinite;
+            will-change: transform;
+        }
+        .bg-shapes .ring:nth-child(6) {
+            width: 500px;
+            height: 500px;
+            top: 5%;
+            left: 30%;
+            animation-duration: 35s;
+            border-color: rgba(249,168,37,0.04);
+        }
+        .bg-shapes .ring:nth-child(7) {
+            width: 350px;
+            height: 350px;
+            bottom: 10%;
+            right: 15%;
+            animation-duration: 28s;
+            animation-direction: reverse;
+            border-color: rgba(255,215,0,0.03);
+        }
+        /* ===== ЛИНИИ ===== */
+        .bg-shapes .line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(249,168,37,0.06), transparent);
+            animation: slideLine 18s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+        .bg-shapes .line:nth-child(8) {
+            width: 60%;
+            top: 30%;
+            left: -10%;
+            animation-duration: 20s;
+        }
+        .bg-shapes .line:nth-child(9) {
+            width: 40%;
+            bottom: 40%;
+            right: -5%;
+            animation-duration: 16s;
+            animation-delay: -4s;
+        }
+        /* ===== ТРЕУГОЛЬНИКИ ===== */
+        .bg-shapes .triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 100px solid rgba(249,168,37,0.03);
+            opacity: 0.4;
+            animation: floatShape 25s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+        .bg-shapes .triangle:nth-child(10) {
+            top: 60%;
+            left: 5%;
+            animation-duration: 19s;
+            animation-delay: -5s;
+            transform: scale(0.7);
+        }
+        .bg-shapes .triangle:nth-child(11) {
+            top: 15%;
+            right: 15%;
+            animation-duration: 22s;
+            animation-delay: -10s;
+            transform: scale(0.5) rotate(180deg);
+        }
+
+        /* ===== АНИМАЦИИ ===== */
+        @keyframes floatShape {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            33% { transform: translate(30px, -40px) scale(1.02) rotate(5deg); }
+            66% { transform: translate(-20px, 30px) scale(0.98) rotate(-3deg); }
+            100% { transform: translate(15px, -20px) scale(1.01) rotate(2deg); }
+        }
+        @keyframes spinRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes slideLine {
+            0% { transform: translateX(0); opacity: 0.2; }
+            50% { opacity: 0.6; }
+            100% { transform: translateX(100px); opacity: 0.2; }
+        }
+
+        /* ===== СТИЛИ СТРАНИЦЫ ===== */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
             margin-top: 40px;
+            position: relative;
+            z-index: 1;
         }
-        .contact-grid .card { padding: 28px 24px; }
+        .contact-grid .card { padding: 28px 24px; background: rgba(10,10,10,0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.04); border-radius: 20px; }
         .contact-grid .card h3 { color: #fff; font-size: 1.2rem; margin-bottom: 16px; }
         .contact-item {
             display: flex;
@@ -63,14 +216,35 @@
             border-color: #f9a825;
             color: #f9a825;
         }
+        .section-hero {
+            padding: 120px 0 40px;
+            position: relative;
+            z-index: 1;
+        }
         @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
+<!-- ===== ПАРЯЩАЯ ПОДЛОЖКА ===== -->
+<div class="bg-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="triangle"></div>
+    <div class="triangle"></div>
+</div>
+
 <div class="glow glow-1"></div>
 <div class="glow glow-2"></div>
 
+<!-- ===== HEADER ===== -->
 <header>
     <div class="container header-inner">
         <a href="index.html" class="logo">
@@ -107,14 +281,16 @@
     </div>
 </header>
 
-<section style="padding: 120px 0 40px;">
+<!-- ===== HERO ===== -->
+<section class="section-hero">
     <div class="container">
         <h1 class="section-title"><span class="text-gold">Contact</span> Us</h1>
         <p class="section-subtitle">Get in touch with the XAUT team</p>
     </div>
 </section>
 
-<section style="padding: 20px 0 60px;">
+<!-- ===== CONTACT ===== -->
+<section style="padding: 20px 0 60px; position: relative; z-index: 1;">
     <div class="container">
         <div class="contact-grid">
             <div class="card">
@@ -163,7 +339,7 @@
 </section>
 
 <!-- ===== 50 000+ ФУНКЦИЙ ===== -->
-<section class="functions-section">
+<section class="functions-section" style="position: relative; z-index: 1;">
     <div class="container">
         <h2 class="section-title">⚡ <span class="text-gold">50 000+</span> <span data-i18n="functions-title">Functions</span></h2>
         <p class="subtitle" data-i18n="functions-sub">All functions work in real-time — automatically generated</p>
@@ -181,7 +357,8 @@
     </div>
 </section>
 
-<div class="container contract-box">
+<!-- ===== CONTRACT ===== -->
+<div class="container contract-box" style="position: relative; z-index: 1;">
     <div class="label" data-i18n="contract-label">Contract Address</div>
     <code>54cupsRcuquPgWqJRuS95kVub44qyMh5ZxhxVTnoQuBM</code>
     <div class="pool-link">
@@ -189,7 +366,8 @@
     </div>
 </div>
 
-<footer>
+<!-- ===== FOOTER ===== -->
+<footer style="position: relative; z-index: 1;">
     <div class="container">
         <div class="socials">
             <a href="https://x.com/xautgold" target="_blank" data-i18n="footer-twitter">🐦 Twitter</a>
@@ -203,6 +381,7 @@
     </div>
 </footer>
 
+<!-- ===== СКРИПТЫ ===== -->
 <script>
     // ===== ПЕРЕВОДЧИК =====
     const translations = {
