@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trade — XAUT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* ===== AI ЧАТ ===== */
+        .ai-chat-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            width: 380px;
+            max-width: 90vw;
+            font-family: 'Inter', sans-serif;
+        }
+        .ai-chat-toggle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f9a825, #e08e0b);
+            border: none;
+            color: #0a0a0a;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 8px 40px rgba(249,168,37,0.4);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+        }
+        .ai-chat-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 50px rgba(249,168,37,0.5);
+        }
+        .ai-chat-toggle .pulse {
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(249,168,37,0.2);
+            animation: pulse-ring 2s ease-out infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        .ai-chat-window {
+            display: none;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.7);
+            overflow: hidden;
+            margin-bottom: 16px;
+            flex-direction: column;
+            height: 500px;
+            max-height: 70vh;
+        }
+        .ai-chat-window.open { display: flex; }
+        .ai-chat-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(249,168,37,0.03);
+        }
+        .ai-chat-header .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f9a825, #e08e0b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #0a0a0a;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .ai-chat-header .info { flex: 1; }
+        .ai-chat-header .info .name {
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        .ai-chat-header .info .status {
+            color: #4caf50;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .ai-chat-header .info .status .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #4caf50;
+            display: inline-block;
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+        .ai-chat-header .close-btn {
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            padding: 4px 8px;
+        }
+        .ai-chat-header .close-btn:hover { color: #fff; }
+        .ai-chat-messages {
+            flex: 1;
+            padding: 16px 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .ai-chat-messages::-webkit-scrollbar { width: 4px; }
+        .ai-chat-messages::-webkit-scrollbar-track { background: transparent; }
+        .ai-chat-messages::-webkit-scrollbar-thumb { background: rgba(249,168,37,0.3); border-radius: 10px; }
+        .ai-msg {
+            max-width: 85%;
+            padding: 10px 16px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            animation: msgIn 0.3s ease-out;
+        }
+        @keyframes msgIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .ai-msg.bot {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.04);
+            color: #ddd;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .ai-msg.bot .gold { color: #f9a825; font-weight: 600; }
+        .ai-msg.user {
+            background: linear-gradient(135deg, #f9a825, #e08e0b);
+            color: #0a0a0a;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+            font-weight: 500;
+        }
+        .ai-msg .typing-dots {
+            display: inline-flex;
+            gap: 4px;
+        }
+        .ai-msg .typing-dots span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #888;
+            display: inline-block;
+            animation: typingBounce 1.2s ease-in-out infinite;
+        }
+        .ai-msg .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .ai-msg .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingBounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-6px); }
+        }
+        .ai-chat-input {
+            padding: 12px 20px 16px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            display: flex;
+            gap: 10px;
+            background: rgba(0,0,0,0.2);
+        }
+        .ai-chat-input input {
+            flex: 1;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 40px;
+            padding: 10px 18px;
+            color: #fff;
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+        .ai-chat-input input:focus {
+            outline: none;
+            border-color: #f9a825;
+            background: rgba(255,255,255,0.06);
+        }
+        .ai-chat-input input::placeholder { color: #555; }
+        .ai-chat-input button {
+            background: linear-gradient(135deg, #f9a825, #e08e0b);
+            border: none;
+            color: #0a0a0a;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.85rem;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .ai-chat-input button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(249,168,37,0.3);
+        }
+        .ai-chat-input button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .ai-chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 4px 20px 8px;
+        }
+        .ai-chat-suggestions button {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 40px;
+            color: #888;
+            font-size: 0.7rem;
+            padding: 4px 14px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+        .ai-chat-suggestions button:hover {
+            border-color: #f9a825;
+            color: #f9a825;
+            background: rgba(249,168,37,0.05);
+        }
+        @media (max-width: 600px) {
+            .ai-chat-container { right: 16px; bottom: 16px; width: calc(100vw - 32px); }
+            .ai-chat-window { height: 420px; max-height: 60vh; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/goldtether/xaut/main/xaut_logo.jpg" alt="XAUT">
+            <span>XAUT</span>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html" data-i18n="nav-home">Home</a>
+            <a href="about.html" data-i18n="nav-about">About</a>
+            <a href="tokenomics.html" data-i18n="nav-tokenomics">Tokenomics</a>
+            <a href="reserves.html" data-i18n="nav-reserves">Reserves</a>
+            <a href="pool.html" data-i18n="nav-pool">Pool</a>
+            <a href="staking.html" data-i18n="nav-staking">Staking</a>
+            <a href="buy.html" data-i18n="nav-buy">Buy</a>
+            <a href="blog.html" data-i18n="nav-blog">Blog</a>
+            <a href="team.html" data-i18n="nav-team">Team</a>
+            <a href="contact.html" data-i18n="nav-contact">Contact</a>
+            <a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+            <button class="btn-connect" onclick="alert('🔗 Connect wallet — coming soon!')" data-i18n="connect-wallet">Connect Wallet</button>
+            <div class="lang-switcher">
+                <button class="lang-btn" id="langToggle">🌐 <span id="currentLangLabel">EN</span></button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <button data-lang="en" class="active">🇬🇧 English</button>
+                    <button data-lang="ru">🇷🇺 Русский</button>
+                    <button data-lang="es">🇪🇸 Español</button>
+                    <button data-lang="fr">🇫🇷 Français</button>
+                    <button data-lang="de">🇩🇪 Deutsch</button>
+                    <button data-lang="zh">🇨🇳 中文</button>
+                    <button data-lang="ja">🇯🇵 日本語</button>
+                    <button data-lang="ko">🇰🇷 한국어</button>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== TRADE CONTENT ===== -->
+<section style="padding: 120px 0 60px;">
+    <div class="container">
+        <h1 class="section-title"><span class="text-gold">Trade</span> XAUT</h1>
+        <p class="section-subtitle">Trade XAUT with the power of AI — get real-time insights and recommendations</p>
+    </div>
+</section>
+
+<section style="padding: 20px 0 40px;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px; align-items: start;">
+            <div>
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 20px; padding: 30px;">
+                    <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 16px;">📊 Market Overview</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+                        <div><span style="color: #888; font-size: 0.8rem;">Price</span><div style="color: #f9a825; font-size: 1.4rem; font-weight: 800;">$0.01</div></div>
+                        <div><span style="color: #888; font-size: 0.8rem;">24h Change</span><div style="color: #4caf50; font-size: 1.4rem; font-weight: 800;">+2.34%</div></div>
+                        <div><span style="color: #888; font-size: 0.8rem;">Volume</span><div style="color: #fff; font-size: 1.4rem; font-weight: 800;">$124.5K</div></div>
+                    </div>
+                    <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 16px;">
+                        <p style="color: #888; font-size: 0.9rem;">🎯 <span style="color: #f9a825;">AI Insight:</span> XAUT is showing strong accumulation patterns. Current support at $0.0098, resistance at $0.0105.</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank" class="btn-gold" style="display: block; text-align: center;">🚀 Trade on GeckoTerminal</a>
+                <div style="margin-top: 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; padding: 16px; text-align: center;">
+                    <span style="color: #888; font-size: 0.8rem;">⚡ Powered by</span>
+                    <div style="color: #f9a825; font-weight: 700; font-size: 1.1rem;">Solana • Meteora</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== AI ЧАТ ===== -->
+<div class="ai-chat-container" id="aiChatContainer">
+    <!-- Кнопка-триггер -->
+    <button class="ai-chat-toggle" id="aiChatToggle" onclick="toggleChat()">
+        <span class="pulse"></span>
+        🤖
+    </button>
+
+    <!-- Окно чата -->
+    <div class="ai-chat-window" id="aiChatWindow">
+        <div class="ai-chat-header">
+            <div class="avatar">X</div>
+            <div class="info">
+                <div class="name">XAUT AI Assistant</div>
+                <div class="status"><span class="dot"></span> Online — Ready to help</div>
+            </div>
+            <button class="close-btn" onclick="toggleChat()">✕</button>
+        </div>
+
+        <div class="ai-chat-messages" id="aiMessages">
+            <div class="ai-msg bot">
+                👋 <span class="gold">Welcome to XAUT!</span><br />
+                I'm your AI trading assistant. I can help you with:<br />
+                • 📊 Market insights<br />
+                • 💎 Token features<br />
+                • 🚀 Buying & staking guides<br />
+                • 🔮 Price predictions<br /><br />
+                <span style="color: #666; font-size: 0.8rem;">Ask me anything about XAUT!</span>
+            </div>
+        </div>
+
+        <div class="ai-chat-suggestions" id="aiSuggestions">
+            <button onclick="askAI('What is XAUT?')">What is XAUT?</button>
+            <button onclick="askAI('How to buy XAUT?')">How to buy?</button>
+            <button onclick="askAI('What is the supply?')">Supply</button>
+            <button onclick="askAI('Is XAUT gold-backed?')">Gold-backed?</button>
+            <button onclick="askAI('Price prediction?')">Price prediction</button>
+        </div>
+
+        <div class="ai-chat-input">
+            <input type="text" id="aiInput" placeholder="Ask about XAUT..." onkeypress="if(event.key==='Enter') askAI()" />
+            <button onclick="askAI()">Send</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container">
+        <div class="socials">
+            <a href="https://x.com/xautgold" target="_blank" data-i18n="footer-twitter">🐦 Twitter</a>
+            <a href="#" target="_blank" data-i18n="footer-telegram">💬 Telegram</a>
+            <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank" data-i18n="footer-gecko">📊 GeckoTerminal</a>
+            <a href="#" target="_blank" data-i18n="footer-coingecko">📈 CoinGecko</a>
+            <a href="#" target="_blank" data-i18n="footer-medium">📝 Medium</a>
+            <a href="#" target="_blank" data-i18n="footer-github">🔗 GitHub</a>
+        </div>
+        <p style="margin-top:20px; color:#444;" data-i18n="footer-copy">© 2026 XAUT Protocol. Built on Solana.</p>
+    </div>
+</footer>
+
+<!-- ===== СКРИПТЫ ===== -->
+<script>
+    // ================================================================
+    // AI ЧАТ — ответы на все вопросы
+    // ================================================================
+
+    const aiResponses = {
+        'what is xaut': '🥇 <span class="gold">XAUT (Xtreme Gold)</span> is the gold standard of DeFi on Solana. Each token is backed by physical gold, stored in secure vaults. With 10B supply and 0.25% transfer fee, XAUT makes gold accessible to everyone.',
+
+        'how to buy': '🚀 <span class="gold">Buying XAUT is easy!</span> 1️⃣ Get a Solana wallet (Phantom/Solflare). 2️⃣ Fund it with SOL or USDC. 3️⃣ Go to <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank" style="color:#f9a825;">GeckoTerminal</a> or Meteora and swap for XAUT. Simple!',
+
+        'supply': '📊 <span class="gold">Total Supply:</span> <strong>10,000,000,000 XAUT</strong> (10 Billion). This ensures maximum liquidity and accessibility for everyone.',
+
+        'gold backed': '✅ <span class="gold">Yes! 100% gold-backed.</span> Every XAUT token represents 1 gram of physical gold, stored in audited vaults with full transparency. You can verify the reserves anytime.',
+
+        'price prediction': '🔮 <span class="gold">AI Price Prediction:</span> Based on current market trends, XAUT shows strong bullish momentum. Analysts predict a potential 50-100% growth in the coming months. <span style="color:#666;font-size:0.8rem;">(Not financial advice)</span>',
+
+        'staking': '⚡ <span class="gold">Staking XAUT</span> earns you up to <strong>25% APY</strong>. Flexible staking — no lock-up period, instant unstake, and compound rewards. Start earning passive income today!',
+
+        'tokenomics': '📈 <span class="gold">XAUT Tokenomics:</span> 10B total supply. 30% public sale, 15% team (locked 12 months), 20% ecosystem, 25% staking rewards, 10% reserves. 0.25% transfer fee.',
+
+        'solana': '⚡ <span class="gold">Why Solana?</span> Transactions in under 0.5 seconds, fees under $0.001, and unmatched security. Solana makes XAUT faster and cheaper than any other digital gold token.',
+
+        'team': '👥 <span class="gold">XAUT Team:</span> Led by <strong>Mikael Virtanen</strong> (CEO, ex-Nordea), <strong>Eliyahu Cohen</strong> (CTO, ex-Intel), <strong>Thabo Nkosi</strong> (Head of DeFi, ex-JPMorgan), and other industry veterans.',
+
+        'meteora': '🌊 <span class="gold">Meteora:</span> XAUT is traded on Meteora DEX with deep liquidity. <a href="https://www.geckoterminal.com/solana/pools/HZ2bx9LA5twuSyTMTepMaAn6MgTFJiKc3LQdSTp5mfum" target="_blank" style="color:#f9a825;">View the pool here</a>.',
+
+        'why xaut': '💎 <span class="gold">Why XAUT?</span> 1️⃣ Real gold backing 2️⃣ Solana speed 3️⃣ 10B supply 4️⃣ 0.25% fee 5️⃣ DeFi ready 6️⃣ Staking rewards 7️⃣ Full transparency. The future of digital gold is here!',
+
+        'default': '🤔 <span class="gold">Great question!</span> I\'m still learning, but here\'s what I know: XAUT is the gold standard of DeFi on Solana. You can ask me about: <br>• What is XAUT?<br>• How to buy?<br>• Supply & tokenomics<br>• Staking rewards<br>• Price predictions<br>• Gold backing<br><span style="color:#666;font-size:0.8rem;">Try one of these questions!</span>'
+    };
+
+    function getAIResponse(input) {
+        const lower = input.toLowerCase().trim();
+        // Проверяем ключевые слова
+        for (const [key, value] of Object.entries(aiResponses)) {
+            if (lower.includes(key)) {
+                return value;
+            }
+        }
+        // Дополнительные проверки
+        if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
+            return '👋 <span class="gold">Hello there!</span> Welcome to XAUT! How can I help you today? Ask me about buying, staking, tokenomics, or anything else!';
+        }
+        if (lower.includes('thank')) {
+            return '😊 <span class="gold">You\'re welcome!</span> Glad I could help. Remember, XAUT is the gold standard of DeFi on Solana. 🚀';
+        }
+        if (lower.includes('who')) {
+            return '🤖 <span class="gold">I\'m XAUT AI Assistant</span> — your personal guide to Xtreme Gold on Solana. I\'m here to help you understand the token, buy it, stake it, and more!';
+        }
+        return aiResponses['default'];
+    }
+
+    function addMessage(text, type) {
+        const container = document.getElementById('aiMessages');
+        const msg = document.createElement('div');
+        msg.className = `ai-msg ${type}`;
+        msg.innerHTML = text;
+        container.appendChild(msg);
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function addTypingIndicator() {
+        const container = document.getElementById('aiMessages');
+        const div = document.createElement('div');
+        div.className = 'ai-msg bot';
+        div.id = 'typingIndicator';
+        div.innerHTML = `<div class="typing-dots"><span></span><span></span><span></span></div>`;
+        container.appendChild(div);
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+        const el = document.getElementById('typingIndicator');
+        if (el) el.remove();
+    }
+
+    function askAI(input) {
+        const inputField = document.getElementById('aiInput');
+        const text = input || inputField.value.trim();
+        if (!text) return;
+
+        // Показываем сообщение пользователя
+        addMessage(text, 'user');
+        inputField.value = '';
+        inputField.focus();
+
+        // Показываем индикатор печати
+        addTypingIndicator();
+
+        // Имитация задержки AI
+        const delay = 800 + Math.random() * 1200;
+        setTimeout(() => {
+            removeTypingIndicator();
+            const response = getAIResponse(text);
+            addMessage(response, 'bot');
+        }, delay);
+    }
+
+    function toggleChat() {
+        const window = document.getElementById('aiChatWindow');
+        const toggle = document.getElementById('aiChatToggle');
+        window.classList.toggle('open');
+        if (window.classList.contains('open')) {
+            toggle.style.display = 'none';
+        } else {
+            toggle.style.display = 'flex';
+        }
+    }
+
+    // Закрытие чата по Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const window = document.getElementById('aiChatWindow');
+            const toggle = document.getElementById('aiChatToggle');
+            if (window.classList.contains('open')) {
+                window.classList.remove('open');
+                toggle.style.display = 'flex';
+            }
+        }
+    });
+
+    // ================================================================
+    // ПЕРЕВОДЧИК
+    // ================================================================
+
+    const translations = {
+        en: {
+            'nav-home': 'Home','nav-about':'About','nav-tokenomics':'Tokenomics',
+            'nav-reserves':'Reserves','nav-pool':'Pool','nav-staking':'Staking',
+            'nav-buy':'Buy','nav-blog':'Blog','nav-team':'Team',
+            'nav-contact':'Contact','nav-gallery':'Gallery',
+            'connect-wallet':'Connect Wallet',
+            'footer-twitter':'🐦 Twitter','footer-telegram':'💬 Telegram',
+            'footer-gecko':'📊 GeckoTerminal','footer-coingecko':'📈 CoinGecko',
+            'footer-medium':'📝 Medium','footer-github':'🔗 GitHub',
+            'footer-copy':'© 2026 XAUT Protocol. Built on Solana.'
+        },
+        ru: {
+            'nav-home':'Главная','nav-about':'О токене','nav-tokenomics':'Токеномика',
+            'nav-reserves':'Резервы','nav-pool':'Пул','nav-staking':'Стейкинг',
+            'nav-buy':'Купить','nav-blog':'Блог','nav-team':'Команда',
+            'nav-contact':'Контакты','nav-gallery':'Галерея',
+            'connect-wallet':'Подключить кошелёк',
+            'footer-twitter':'🐦 Twitter','footer-telegram':'💬 Telegram',
+            'footer-gecko':'📊 GeckoTerminal','footer-coingecko':'📈 CoinGecko',
+            'footer-medium':'📝 Medium','footer-github':'🔗 GitHub',
+            'footer-copy':'© 2026 XAUT Protocol. Создано на Solana.'
+        }
+    };
+
+    let currentLang = localStorage.getItem('xautLang') || 'en';
+
+    function applyLanguage(lang) {
+        if (!translations[lang]) return;
+        const t = translations[lang];
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (t[key]) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = t[key];
+                } else {
+                    el.textContent = t[key];
+                }
+            }
+        });
+        document.getElementById('currentLangLabel').textContent = lang.toUpperCase();
+        document.querySelectorAll('.lang-dropdown button').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        localStorage.setItem('xautLang', lang);
+        currentLang = lang;
+    }
+
+    document.getElementById('langToggle').addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.getElementById('langDropdown').classList.toggle('show');
+    });
+    document.addEventListener('click', () => {
+        document.getElementById('langDropdown').classList.remove('show');
+    });
+    document.querySelectorAll('.lang-dropdown button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            applyLanguage(btn.dataset.lang);
+            document.getElementById('langDropdown').classList.remove('show');
+        });
+    });
+    applyLanguage(currentLang);
+</script>
+
+</body>
+</html>
