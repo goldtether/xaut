@@ -3,48 +3,54 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About — XAUT</title>
+    <title>Tokenomics — XAUT</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .mission-grid {
+        .tokenomics-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
+            gap: 40px;
             margin-top: 40px;
         }
-        .mission-grid img { width: 100%; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
-        .mission-grid h2 { font-size: 2.2rem; color: #fff; }
-        .mission-grid p { color: #888; margin-top: 16px; line-height: 1.8; }
-        .mission-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
-        .mission-badges span {
-            background: rgba(249,168,37,0.1);
-            padding: 6px 18px;
-            border-radius: 40px;
-            color: #f9a825;
-            font-size: 0.85rem;
-            font-weight: 500;
+        .tokenomics-grid .card { padding: 28px 24px; }
+        .tokenomics-grid .card h3 { color: #fff; font-size: 1.2rem; margin-bottom: 16px; }
+        .token-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
         }
-        .about-features {
+        .token-detail:last-child { border-bottom: none; }
+        .token-detail .label { color: #888; }
+        .token-detail .value { color: #fff; font-weight: 600; }
+        .legend-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-top: 16px;
+        }
+        .legend-grid .item { font-size: 0.85rem; color: #aaa; }
+        .legend-grid .item .dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 4px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .allocation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
             margin-top: 40px;
         }
-        .about-features .card { text-align: center; padding: 32px 20px; }
-        .about-features .card .icon { font-size: 2.8rem; margin-bottom: 12px; }
-        .about-features .card h3 { color: #fff; font-size: 1.1rem; }
-        .about-features .card p { color: #888; font-size: 0.9rem; margin-top: 4px; }
-        .vision-box {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(249,168,37,0.12);
-            border-radius: 24px;
-            padding: 48px 32px;
-            text-align: center;
-            margin-top: 40px;
-        }
-        @media (max-width: 768px) { .mission-grid { grid-template-columns: 1fr; gap: 30px; } }
+        .allocation-grid .card { text-align: center; padding: 20px 16px; }
+        .allocation-grid .card .value { font-size: 1.8rem; font-weight: 800; color: #f9a825; }
+        .allocation-grid .card .label { color: #888; font-size: 0.85rem; margin-top: 4px; }
+        .allocation-grid .card .desc { color: #666; font-size: 0.75rem; margin-top: 4px; }
+        @media (max-width: 768px) { .tokenomics-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -61,8 +67,8 @@
         </a>
         <nav class="nav-links">
             <a href="index.html">Home</a>
-            <a href="about.html" class="active">About</a>
-            <a href="tokenomics.html">Tokenomics</a>
+            <a href="about.html">About</a>
+            <a href="tokenomics.html" class="active">Tokenomics</a>
             <a href="reserves.html">Reserves</a>
             <a href="pool.html">Pool</a>
             <a href="staking.html">Staking</a>
@@ -79,43 +85,53 @@
 <!-- ===== HERO ===== -->
 <section style="padding: 120px 0 40px;">
     <div class="container">
-        <h1 class="section-title">About <span class="text-gold">XAUT</span></h1>
-        <p class="section-subtitle">The gold standard of DeFi on Solana — bringing physical gold to the digital age</p>
+        <h1 class="section-title"><span class="text-gold">Tokenomics</span></h1>
+        <p class="section-subtitle">Understanding the XAUT token distribution and economics</p>
     </div>
 </section>
 
-<!-- ===== MISSION ===== -->
+<!-- ===== TOKENOMICS ===== -->
 <section style="padding: 20px 0 60px;">
     <div class="container">
-        <div class="mission-grid">
-            <img src="https://raw.githubusercontent.com/goldtether/xaut/main/XAUT_gold_bars.jpg" alt="Gold Bars" />
-            <div>
-                <h2>Our Mission</h2>
-                <p>To democratize access to gold by tokenizing it on Solana. XAUT combines the timeless value of gold with the speed, security, and innovation of blockchain technology.</p>
-                <p>We believe that everyone should have access to the stability and security of gold, without the barriers of traditional gold ownership.</p>
-                <div class="mission-badges">
-                    <span>10B Supply</span>
-                    <span>Token 2022</span>
-                    <span>0.25% Fee</span>
-                    <span>Gold-Backed</span>
-                    <span>DeFi Ready</span>
+        <div class="tokenomics-grid">
+            <div class="card">
+                <h3>Token Distribution</h3>
+                <canvas id="tokenChart" height="280"></canvas>
+                <div class="legend-grid">
+                    <div class="item"><span class="dot" style="background:#f9a825;"></span>Public Sale 30%</div>
+                    <div class="item"><span class="dot" style="background:#e08e0b;"></span>Team & Advisors 15%</div>
+                    <div class="item"><span class="dot" style="background:#b56d0a;"></span>Ecosystem 20%</div>
+                    <div class="item"><span class="dot" style="background:#f7b525;"></span>Staking Rewards 25%</div>
+                    <div class="item"><span class="dot" style="background:#fbdb8a;"></span>Reserves 10%</div>
                 </div>
+            </div>
+            <div class="card">
+                <h3>Key Metrics</h3>
+                <div class="token-detail"><span class="label">Total Supply</span><span class="value">10,000,000,000 XAUT</span></div>
+                <div class="token-detail"><span class="label">Decimals</span><span class="value">9</span></div>
+                <div class="token-detail"><span class="label">Transfer Fee</span><span class="value">0.25%</span></div>
+                <div class="token-detail"><span class="label">Standard</span><span class="value">SPL Token 2022</span></div>
+                <div class="token-detail"><span class="label">Initial Price</span><span class="value">$0.01</span></div>
+                <div class="token-detail"><span class="label">Market Cap</span><span class="value">$100,000,000</span></div>
+                <div class="token-detail"><span class="label">Blockchain</span><span class="value">Solana</span></div>
+                <div class="token-detail"><span class="label">Mint Authority</span><span class="value">❌ Disabled</span></div>
+                <div class="token-detail"><span class="label">Freeze Authority</span><span class="value">❌ Disabled</span></div>
+                <div class="token-detail"><span class="label">Update Authority</span><span class="value">✅ Enabled</span></div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===== FEATURES ===== -->
+<!-- ===== ALLOCATION ===== -->
 <section style="padding: 40px 0 60px; border-top: 1px solid rgba(255,255,255,0.04);">
     <div class="container">
-        <h2 class="section-title">Why <span class="text-gold">XAUT</span>?</h2>
-        <div class="about-features">
-            <div class="card"><div class="icon">🥇</div><h3>100% Gold-Backed</h3><p>Each XAUT token is backed by one gram of physical gold, stored in secure vaults.</p></div>
-            <div class="card"><div class="icon">⚡</div><h3>Solana Speed</h3><p>Transactions in under 0.5 seconds with fees under $0.001.</p></div>
-            <div class="card"><div class="icon">🔒</div><h3>Maximum Security</h3><p>Built on Solana's secure infrastructure with full transparency.</p></div>
-            <div class="card"><div class="icon">🌐</div><h3>DeFi Ready</h3><p>Use XAUT as collateral, stake it, or trade it on leading DEXs.</p></div>
-            <div class="card"><div class="icon">📊</div><h3>10B Supply</h3><p>Large supply for maximum accessibility and liquidity.</p></div>
-            <div class="card"><div class="icon">💎</div><h3>0.25% Transfer Fee</h3><p>Low transfer fee to incentivize usage while supporting the ecosystem.</p></div>
+        <h2 class="section-title">Allocation <span class="text-gold">Details</span></h2>
+        <div class="allocation-grid">
+            <div class="card"><div class="value">30%</div><div class="label">Public Sale</div><div class="desc">Available for public purchase</div></div>
+            <div class="card"><div class="value">15%</div><div class="label">Team & Advisors</div><div class="desc">Locked for 12 months</div></div>
+            <div class="card"><div class="value">20%</div><div class="label">Ecosystem</div><div class="desc">Development & partnerships</div></div>
+            <div class="card"><div class="value">25%</div><div class="label">Staking Rewards</div><div class="desc">Incentives for stakers</div></div>
+            <div class="card"><div class="value">10%</div><div class="label">Reserves</div><div class="desc">Future liquidity & growth</div></div>
         </div>
     </div>
 </section>
@@ -157,12 +173,13 @@
     </div>
 </section>
 
-<!-- ===== VISION ===== -->
-<section style="padding: 40px 0 60px; border-top: 1px solid rgba(255,255,255,0.04);">
+<!-- ===== NOTE ===== -->
+<section style="padding: 20px 0 40px; border-top: 1px solid rgba(255,255,255,0.04);">
     <div class="container">
-        <div class="vision-box">
-            <h2 style="font-size: 2rem; font-weight: 800;">The Future of <span class="text-gradient-gold">Digital Gold</span></h2>
-            <p style="color: #888; max-width: 700px; margin: 16px auto 0;">XAUT is more than a token — it's a movement to bring the stability of gold to the decentralized world. Join us in building the gold standard of DeFi.</p>
+        <div class="card" style="text-align: center; padding: 24px; border-color: rgba(249,168,37,0.12);">
+            <p style="color: #888; font-size: 0.95rem;">
+                <span style="color: #f9a825;">ℹ️ Note:</span> XAUT uses the SPL Token 2022 standard with a 0.25% transfer fee to support ecosystem development and sustainability.
+            </p>
         </div>
     </div>
 </section>
@@ -191,8 +208,29 @@
     </div>
 </footer>
 
-<!-- ===== ГЕНЕРАТОР ФУНКЦИЙ ===== -->
 <script>
+    // Chart.js
+    const ctx = document.getElementById('tokenChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Public Sale', 'Team & Advisors', 'Ecosystem', 'Staking Rewards', 'Reserves'],
+            datasets: [{
+                data: [30, 15, 20, 25, 10],
+                backgroundColor: ['#f9a825', '#e08e0b', '#b56d0a', '#f7b525', '#fbdb8a'],
+                borderColor: '#0a0a0a',
+                borderWidth: 3,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            cutout: '58%',
+        }
+    });
+
+    // ===== 50 000+ ФУНКЦИЙ =====
     const CATEGORIES = [
         { id: 'converter', name: '🔄 Конвертеры', count: 10000 },
         { id: 'predictor', name: '📈 Прогнозы цены', count: 5000 },
