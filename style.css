@@ -447,6 +447,15 @@ footer .socials a:hover { color: #f9a825; transform: translateY(-2px); }
     background: rgba(76,175,80,0.15);
     color: #4caf50;
 }
+.function-card .link-icon {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 0.7rem;
+    color: #f9a825;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.function-card:hover .link-icon { opacity: 1; }
 .badge {
     display: inline-block;
     background: rgba(249,168,37,0.12);
@@ -488,6 +497,67 @@ footer .socials a:hover { color: #f9a825; transform: translateY(-2px); }
 }
 .btn-test:hover { transform: scale(1.02); opacity: 0.9; }
 
+/* ===== LANGUAGE SWITCHER ===== */
+.lang-switcher {
+    position: relative;
+    display: inline-block;
+    margin-left: 8px;
+}
+.lang-btn {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #eef2f8;
+    padding: 4px 12px;
+    border-radius: 40px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: inherit;
+}
+.lang-btn:hover {
+    background: rgba(249,168,37,0.1);
+    border-color: #f9a825;
+}
+.lang-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: #0b0e14;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 6px 0;
+    min-width: 160px;
+    display: none;
+    z-index: 999;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.lang-dropdown.show { display: block; }
+.lang-dropdown button {
+    background: none;
+    border: none;
+    color: #8892b0;
+    padding: 6px 18px;
+    width: 100%;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.1s;
+    font-family: inherit;
+}
+.lang-dropdown button:hover {
+    background: rgba(249,168,37,0.05);
+    color: #f9a825;
+}
+.lang-dropdown button.active {
+    color: #f9a825;
+    font-weight: 700;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {
     .nav-links a { font-size: 12px; padding: 4px 10px; }
@@ -504,6 +574,7 @@ footer .socials a:hover { color: #f9a825; transform: translateY(-2px); }
     .btn-gold, .btn-outline { padding: 12px 28px; font-size: 0.95rem; }
     .card { padding: 20px 16px; }
     .generator-info { flex-direction: column; text-align: center; }
+    .lang-switcher { margin-left: 0; }
 }
 @media (max-width: 480px) {
     .stats { grid-template-columns: 1fr 1fr; }
